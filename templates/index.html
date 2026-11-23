@@ -1,0 +1,193 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Dog Breed Identification{% endblock %}
+
+{% block content %}
+
+<!-- ==================== Hero Section with Real Background Image ==================== -->
+<section class="hero">
+    <!-- Real dog photo as hero background -->
+    <div class="hero-bg-img">
+        <img
+            src="https://images.pexels.com/photos/356378/pexels-photo-356378.jpeg?auto=compress&cs=tinysrgb&w=1200&h=600&fit=crop"
+            alt="Dogs"
+            loading="eager"
+        />
+        <div class="hero-bg-overlay"></div>
+    </div>
+    <div class="hero-content">
+        <h1>Discover Your Dog's Breed</h1>
+        <p class="hero-subtitle">
+            Upload a photo of any dog and let our machine learning model
+            identify its breed instantly. A fun and practical Data Science
+            project built for learning.
+        </p>
+        <a href="{{ url_for('identify') }}" class="hero-btn">Identify Breed</a>
+    </div>
+</section>
+
+<div class="container">
+
+    <!-- ==================== Popular Dog Breeds Gallery ==================== -->
+    <section class="section">
+        <h2 class="section-title">🐶 Popular Dog Breeds</h2>
+        <p class="section-subtitle">
+            Our system can recognize 120 different dog breeds from a single photo.
+        </p>
+
+        <div class="dog-gallery">
+
+            <div class="dog-card">
+                <div class="dog-card-img">
+                    <img
+                        src="https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=500&h=350&fit=crop"
+                        alt="Golden Retriever"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="dog-card-body">
+                    <h3>Golden Retriever</h3>
+                    <p>Friendly, intelligent, and devoted family companion known for its golden coat.</p>
+                </div>
+            </div>
+
+            <div class="dog-card">
+                <div class="dog-card-img">
+                    <img
+                        src="https://images.pexels.com/photos/333083/pexels-photo-333083.jpeg?auto=compress&cs=tinysrgb&w=500&h=350&fit=crop"
+                        alt="German Shepherd"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="dog-card-body">
+                    <h3>German Shepherd</h3>
+                    <p>Courageous, confident, and a loyal working dog used in police and rescue.</p>
+                </div>
+            </div>
+
+            <div class="dog-card">
+                <div class="dog-card-img">
+                    <img
+                        src="https://images.pexels.com/photos/2607544/pexels-photo-2607544.jpeg?auto=compress&cs=tinysrgb&w=500&h=350&fit=crop"
+                        alt="Labrador Retriever"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="dog-card-body">
+                    <h3>Labrador Retriever</h3>
+                    <p>Outgoing, active, and friendly. One of the most popular breeds worldwide.</p>
+                </div>
+            </div>
+
+            <div class="dog-card">
+                <div class="dog-card-img">
+                    <img
+                        src="https://images.pexels.com/photos/2853131/pexels-photo-2853131.jpeg?auto=compress&cs=tinysrgb&w=500&h=350&fit=crop"
+                        alt="Siberian Husky"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="dog-card-body">
+                    <h3>Siberian Husky</h3>
+                    <p>Energetic and mischievous sled dog famous for its striking blue eyes.</p>
+                </div>
+            </div>
+
+            <div class="dog-card">
+                <div class="dog-card-img">
+                    <img
+                        src="https://images.pexels.com/photos/1254140/pexels-photo-1254140.jpeg?auto=compress&cs=tinysrgb&w=500&h=350&fit=crop"
+                        alt="Beagle"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="dog-card-body">
+                    <h3>Beagle</h3>
+                    <p>Merry, friendly and curious scent hound with an excellent nose.</p>
+                </div>
+            </div>
+
+            <div class="dog-card">
+                <div class="dog-card-img">
+                    <img
+                        src="https://images.pexels.com/photos/4587998/pexels-photo-4587998.jpeg?auto=compress&cs=tinysrgb&w=500&h=350&fit=crop"
+                        alt="Poodle"
+                        loading="lazy"
+                    />
+                </div>
+                <div class="dog-card-body">
+                    <h3>Poodle</h3>
+                    <p>Elegant, proud, and remarkably clever — one of the most intelligent breeds.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="paw-divider">🐾 🐾 🐾</div>
+    </section>
+
+    <!-- ==================== How It Works ==================== -->
+    <section class="section">
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle">
+            Three simple steps to identify any dog breed.
+        </p>
+
+        <div class="steps-row">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-icon">📷</div>
+                <h3>Upload Photo</h3>
+                <p>Take or select a clear photo of the dog you want to identify.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-icon">🧠</div>
+                <h3>ML Analysis</h3>
+                <p>Our trained CNN model processes the image and extracts key visual features.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-icon">🏷️</div>
+                <h3>Get Result</h3>
+                <p>See the predicted breed name with a confidence score instantly.</p>
+            </div>
+        </div>
+
+        <div class="paw-divider">🐾 🐾 🐾</div>
+    </section>
+
+    <!-- ==================== Fun Facts ==================== -->
+    <section class="section">
+        <h2 class="section-title">🐾 Did You Know?</h2>
+        <p class="section-subtitle">
+            Some interesting facts about our dataset and project.
+        </p>
+
+        <div class="facts-row">
+            <div class="fact-card">
+                <div class="fact-icon">🐕</div>
+                <div class="fact-number">120</div>
+                <div class="fact-label">Dog Breeds in Dataset</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-icon">📸</div>
+                <div class="fact-number">10,222</div>
+                <div class="fact-label">Training Images</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-icon">🤖</div>
+                <div class="fact-number">CNN</div>
+                <div class="fact-label">Deep Learning Model</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-icon">⚡</div>
+                <div class="fact-number">&lt;5s</div>
+                <div class="fact-label">Prediction Time</div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

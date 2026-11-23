@@ -1,0 +1,385 @@
+{% extends "base.html" %}
+
+{% block title %}Breed Info & Compare - Dog Breed Identification{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>🐶 Dog Breed Directory & Comparison</h1>
+    <p>Explore comprehensive profiles of all 120 recognized breeds and compare them side by side</p>
+</section>
+
+<div class="container">
+    <section class="section">
+
+        <!-- Navigation Tabs for Directory & Compare -->
+        <div class="breed-tabs-nav">
+            <button type="button" class="breed-tab-btn active" onclick="switchBreedTab('directory')">
+                📚 Breed Directory (120)
+            </button>
+            <button type="button" class="breed-tab-btn" onclick="switchBreedTab('compare')">
+                ⚖️ Compare Two Breeds
+            </button>
+        </div>
+
+        <!-- ==================== SECTION 1: COMPARE BREEDS ==================== -->
+        <div id="compareSection" class="breed-tab-content" style="display: none;">
+            <div class="content-card">
+                <div class="compare-header">
+                    <h2>⚖️ Side-by-Side Breed Comparison</h2>
+                    <p>Select any two dog breeds from the 120 dataset classes to compare their traits, size, origin, and lifespan.</p>
+                </div>
+
+                <div class="compare-selectors-grid">
+                    <div class="selector-box">
+                        <label for="breedSelect1"><strong>Select First Breed:</strong></label>
+                        <select id="breedSelect1" class="compare-dropdown" onchange="updateComparison()">
+                            {% for b in breeds %}
+                            <option value="{{ b.id }}" {% if b.id == 'golden_retriever' %}selected{% endif %}>{{ b.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="compare-vs-badge">VS</div>
+
+                    <div class="selector-box">
+                        <label for="breedSelect2"><strong>Select Second Breed:</strong></label>
+                        <select id="breedSelect2" class="compare-dropdown" onchange="updateComparison()">
+                            {% for b in breeds %}
+                            <option value="{{ b.id }}" {% if b.id == 'german_shepherd' %}selected{% endif %}>{{ b.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Comparison Result Cards -->
+                <div class="compare-results-grid">
+                    <!-- Breed 1 Card -->
+                    <div class="compare-col" id="colBreed1">
+                        <div class="compare-photo-wrapper">
+                            <img id="cmpImg1" src="" alt="Breed 1" class="compare-photo" />
+                        </div>
+                        <h3 id="cmpName1" class="compare-name"></h3>
+                        <p id="cmpDesc1" class="compare-desc"></p>
+
+                        <div class="compare-specs-table">
+                            <div class="spec-row">
+                                <span class="spec-label">Size</span>
+                                <span class="spec-val" id="cmpSize1"></span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Lifespan</span>
+                                <span class="spec-val" id="cmpLife1"></span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Origin</span>
+                                <span class="spec-val" id="cmpOrigin1"></span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Temperament</span>
+                                <span class="spec-val" id="cmpTemp1"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Breed 2 Card -->
+                    <div class="compare-col" id="colBreed2">
+                        <div class="compare-photo-wrapper">
+                            <img id="cmpImg2" src="" alt="Breed 2" class="compare-photo" />
+                        </div>
+                        <h3 id="cmpName2" class="compare-name"></h3>
+                        <p id="cmpDesc2" class="compare-desc"></p>
+
+                        <div class="compare-specs-table">
+                            <div class="spec-row">
+                                <span class="spec-label">Size</span>
+                                <span class="spec-val" id="cmpSize2"></span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Lifespan</span>
+                                <span class="spec-val" id="cmpLife2"></span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Origin</span>
+                                <span class="spec-val" id="cmpOrigin2"></span>
+                            </div>
+                            <div class="spec-row">
+                                <span class="spec-label">Temperament</span>
+                                <span class="spec-val" id="cmpTemp2"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- ==================== SECTION 2: BREED DIRECTORY ==================== -->
+        <div id="directorySection" class="breed-tab-content">
+            <!-- Search & Filter Controls -->
+            <div class="content-card" style="margin-bottom: 24px;">
+                <div class="directory-controls">
+                    <div class="search-input-wrapper">
+                        <span class="search-icon">🔍</span>
+                        <input
+                            type="text"
+                            id="breedSearchInput"
+                            placeholder="Search by breed name, origin (e.g. Germany), or temperament..."
+                            oninput="filterBreeds()"
+                        />
+                        <button type="button" id="clearSearchBtn" onclick="clearSearch()" style="display: none;">&times;</button>
+                    </div>
+
+                    <div class="filter-pills-row">
+                        <span class="filter-label">Filter by Size:</span>
+                        <button type="button" class="filter-pill active" onclick="setSizeFilter('All', this)">All</button>
+                        <button type="button" class="filter-pill" onclick="setSizeFilter('Small', this)">Small</button>
+                        <button type="button" class="filter-pill" onclick="setSizeFilter('Medium', this)">Medium</button>
+                        <button type="button" class="filter-pill" onclick="setSizeFilter('Large', this)">Large</button>
+                        <button type="button" class="filter-pill" onclick="setSizeFilter('Giant', this)">Giant</button>
+                    </div>
+                </div>
+
+                <div class="directory-stats-row">
+                    <span id="breedCountBadge">Showing <strong>{{ breeds|length }}</strong> of <strong>{{ breeds|length }}</strong> breeds</span>
+                </div>
+            </div>
+
+            <!-- 120 Breed Cards Grid -->
+            <div class="breeds-cards-grid" id="breedsGrid">
+                {% for b in breeds %}
+                <div
+                    class="breed-info-card"
+                    data-id="{{ b.id }}"
+                    data-name="{{ b.name|lower }}"
+                    data-size="{{ b.size }}"
+                    data-origin="{{ b.origin|lower }}"
+                    data-temp="{{ b.temperament|lower }}"
+                >
+                    <div class="breed-card-media">
+                        <img
+                            src="{{ url_for('static', filename='images/breeds/' + b.id + '.jpg') }}"
+                            alt="{{ b.name }}"
+                            loading="lazy"
+                            class="breed-card-img"
+                            onerror="this.src='https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=300';"
+                        />
+                        <span class="breed-size-tag tag-{{ b.size|lower }}">{{ b.size }}</span>
+                    </div>
+
+                    <div class="breed-card-body">
+                        <h3 class="breed-card-title">{{ b.name }}</h3>
+
+                        <div class="breed-meta-bar">
+                            <span class="meta-chip">📍 {{ b.origin }}</span>
+                            <span class="meta-chip">⏳ {{ b.lifespan }}</span>
+                        </div>
+
+                        <p class="breed-card-desc">{{ b.description }}</p>
+
+                        <div class="breed-temp-section">
+                            <strong>Temperament:</strong>
+                            <p class="breed-temp-text">{{ b.temperament }}</p>
+                        </div>
+
+                        <div class="breed-card-actions">
+                            <button
+                                type="button"
+                                class="btn-card-compare"
+                                onclick="compareBreedFromCard('{{ b.id }}')"
+                            >
+                                ⚖️ Compare
+                            </button>
+                            <button
+                                type="button"
+                                class="btn-card-favorite {% if user_fav_set and (b.id in user_fav_set or b.name in user_fav_set) %}favorited{% endif %}"
+                                onclick="toggleFavoriteBreed('{{ b.id }}', this)"
+                                title="Bookmark this breed"
+                            >
+                                {% if user_fav_set and (b.id in user_fav_set or b.name in user_fav_set) %}
+                                    ⭐ Saved
+                                {% else %}
+                                    🤍 Favorite
+                                {% endif %}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Empty Search Results Placeholder -->
+            <div id="noBreedsFound" class="content-card" style="display: none; text-align: center; margin-top: 20px;">
+                <div class="placeholder-msg">
+                    <div class="placeholder-icon">🐕</div>
+                    <h3>No matching breeds found</h3>
+                    <p>Try searching for a different name, country of origin, or clearing the size filter.</p>
+                    <button type="button" class="btn btn-choose" onclick="resetAllFilters()" style="margin-top: 14px;">
+                        Reset Filters
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+<!-- ==================== JavaScript for Search, Filter & Compare ==================== -->
+<script>
+// Store all 120 breed records in JS memory for instant client-side comparison and filtering
+var ALL_BREEDS = {{ breeds|tojson }};
+var breedsMap = {};
+for (var i = 0; i < ALL_BREEDS.length; i++) {
+    breedsMap[ALL_BREEDS[i].id] = ALL_BREEDS[i];
+}
+
+var currentSizeFilter = 'All';
+
+// Tab Switcher
+function switchBreedTab(tabName) {
+    var dirTab = document.getElementById('directorySection');
+    var cmpTab = document.getElementById('compareSection');
+    var btns = document.querySelectorAll('.breed-tab-btn');
+
+    if (tabName === 'directory') {
+        dirTab.style.display = 'block';
+        cmpTab.style.display = 'none';
+        btns[0].classList.add('active');
+        btns[1].classList.remove('active');
+    } else {
+        dirTab.style.display = 'none';
+        cmpTab.style.display = 'block';
+        btns[0].classList.remove('active');
+        btns[1].classList.add('active');
+        updateComparison();
+    }
+}
+
+// Real-time Search & Filter
+function filterBreeds() {
+    var query = document.getElementById('breedSearchInput').value.toLowerCase().trim();
+    var clearBtn = document.getElementById('clearSearchBtn');
+    clearBtn.style.display = query.length > 0 ? 'inline-block' : 'none';
+
+    var cards = document.querySelectorAll('.breed-info-card');
+    var visibleCount = 0;
+
+    cards.forEach(function(card) {
+        var name = card.getAttribute('data-name');
+        var size = card.getAttribute('data-size');
+        var origin = card.getAttribute('data-origin');
+        var temp = card.getAttribute('data-temp');
+
+        var matchesSearch = (query === '') ||
+            name.indexOf(query) !== -1 ||
+            origin.indexOf(query) !== -1 ||
+            temp.indexOf(query) !== -1;
+
+        var matchesSize = (currentSizeFilter === 'All') || (size === currentSizeFilter);
+
+        if (matchesSearch && matchesSize) {
+            card.style.display = 'flex';
+            visibleCount++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+
+    // Update Counter & Empty Placeholder
+    document.getElementById('breedCountBadge').innerHTML =
+        'Showing <strong>' + visibleCount + '</strong> of <strong>' + cards.length + '</strong> breeds';
+
+    var noResults = document.getElementById('noBreedsFound');
+    noResults.style.display = (visibleCount === 0) ? 'block' : 'none';
+}
+
+function setSizeFilter(size, btn) {
+    currentSizeFilter = size;
+    document.querySelectorAll('.filter-pill').forEach(function(p) { p.classList.remove('active'); });
+    btn.classList.add('active');
+    filterBreeds();
+}
+
+function clearSearch() {
+    document.getElementById('breedSearchInput').value = '';
+    filterBreeds();
+}
+
+function resetAllFilters() {
+    document.getElementById('breedSearchInput').value = '';
+    currentSizeFilter = 'All';
+    document.querySelectorAll('.filter-pill').forEach(function(p, idx) {
+        if (idx === 0) p.classList.add('active');
+        else p.classList.remove('active');
+    });
+    filterBreeds();
+}
+
+// Side-by-Side Comparison Logic
+function updateComparison() {
+    var id1 = document.getElementById('breedSelect1').value;
+    var id2 = document.getElementById('breedSelect2').value;
+
+    var b1 = breedsMap[id1] || ALL_BREEDS[0];
+    var b2 = breedsMap[id2] || ALL_BREEDS[1];
+
+    populateCompareColumn(1, b1);
+    populateCompareColumn(2, b2);
+}
+
+function populateCompareColumn(num, breed) {
+    document.getElementById('cmpImg' + num).src = breed.image;
+    document.getElementById('cmpName' + num).textContent = breed.name;
+    document.getElementById('cmpDesc' + num).textContent = breed.description;
+    document.getElementById('cmpSize' + num).textContent = breed.size;
+    document.getElementById('cmpLife' + num).textContent = breed.lifespan;
+    document.getElementById('cmpOrigin' + num).textContent = breed.origin;
+    document.getElementById('cmpTemp' + num).textContent = breed.temperament;
+}
+
+// Quick action: compare from a directory card
+function compareBreedFromCard(breedId) {
+    document.getElementById('breedSelect1').value = breedId;
+    switchBreedTab('compare');
+    window.scrollTo({ top: 120, behavior: 'smooth' });
+}
+
+// Toggle favorite bookmark
+function toggleFavoriteBreed(breedId, btn) {
+    fetch('/api/favorites/toggle', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ breed_name: breedId })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        if (data.require_login) {
+            if (confirm("Please log in to bookmark dog breeds. Would you like to log in now?")) {
+                window.location.href = "{{ url_for('login') }}?next={{ url_for('breed_info') }}";
+            }
+            return;
+        }
+        if (data.success) {
+            if (data.is_favorite) {
+                btn.classList.add('favorited');
+                btn.innerHTML = '⭐ Saved';
+            } else {
+                btn.classList.remove('favorited');
+                btn.innerHTML = '🤍 Favorite';
+            }
+        }
+    })
+    .catch(function(err) {
+        console.error('Error toggling favorite:', err);
+    });
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    updateComparison();
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+img_height=224
+img_width=224
+batch_size=32
+num_classes=120
+random_seed=42
+train_size=7155
+val_size=1533
+test_size=1534
+train_steps=224
+val_steps=48
+test_steps=48
+normalisation=mobilenetv2_preprocess_input
+pixel_range=[-1, 1]

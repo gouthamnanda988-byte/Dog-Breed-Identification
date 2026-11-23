@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}My Favorite Breeds - Dog Breed Identification{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>⭐ My Favorite Dog Breeds</h1>
+    <p>Your personal collection of saved dog breeds from the 120 dataset classes</p>
+</section>
+
+<div class="container">
+    <section class="section">
+
+        {% if favorites and favorites|length > 0 %}
+        <div class="content-card">
+            <div class="history-card-header">
+                <div>
+                    <h2>Bookmarked Breeds ({{ favorites|length }})</h2>
+                    <p class="history-card-subtitle">Saved securely in your personal account</p>
+                </div>
+                <a href="{{ url_for('breed_info') }}" class="btn btn-choose" style="margin: 0; padding: 8px 18px; font-size: 0.9rem;">
+                    🔍 Explore More Breeds
+                </a>
+            </div>
+
+            <div class="favorites-grid">
+                {% for b in favorites %}
+                <div class="favorite-card">
+                    <div class="fav-card-img-wrapper">
+                        <img
+                            src="{{ b.image_url if b.image_url else 'https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=400' }}"
+                            alt="{{ b.name }}"
+                            class="fav-card-img"
+                            onerror="this.src='https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=400';"
+                        />
+                        <span class="fav-star-badge">⭐ Saved</span>
+                    </div>
+
+                    <div class="fav-card-body">
+                        <h3 class="fav-breed-name">{{ b.name }}</h3>
+
+                        <div class="fav-specs">
+                            <div class="fav-spec-item">
+                                <span class="fav-spec-label">Origin:</span>
+                                <span class="fav-spec-value">{{ b.origin if b.origin else 'Unknown' }}</span>
+                            </div>
+                            <div class="fav-spec-item">
+                                <span class="fav-spec-label">Lifespan:</span>
+                                <span class="fav-spec-value">{{ b.lifespan if b.lifespan else '10-14 years' }}</span>
+                            </div>
+                            <div class="fav-spec-item">
+                                <span class="fav-spec-label">Temperament:</span>
+                                <span class="fav-spec-value">{{ b.temperament if b.temperament else 'Loyal, energetic' }}</span>
+                            </div>
+                        </div>
+
+                        <div class="fav-actions">
+                            <a href="{{ url_for('breed_info') }}?select={{ b.id }}" class="btn-fav-view">
+                                📖 View Profile
+                            </a>
+                            <form method="POST" action="{{ url_for('remove_favorite', breed_name=b.raw_name) }}" onsubmit="return confirm('Remove {{ b.name }} from your favorites?');" style="display: inline;">
+                                <button type="submit" class="btn-fav-remove" title="Remove from favorites">
+                                    🗑️ Remove
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        <!-- Empty State -->
+        <div class="content-card">
+            <div class="placeholder-msg">
+                <div class="placeholder-icon">⭐</div>
+                <h2>No Favorite Breeds Saved Yet</h2>
+                <p>
+                    You haven't bookmarked any dog breeds yet. Browse our comprehensive 120-breed directory and click the star to save your favorites!
+                </p>
+                <div style="margin-top: 24px;">
+                    <a href="{{ url_for('breed_info') }}" class="btn btn-choose" style="display: inline-block;">
+                        📚 Browse Breed Directory
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </section>
+</div>
+
+{% endblock %}

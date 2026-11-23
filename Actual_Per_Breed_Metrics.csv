@@ -1,0 +1,121 @@
+Breed Identifier,Breed Name,Precision (%),Recall (%),F1-Score (%),Support (Test Samples)
+african_hunting_dog,African Hunting Dog,100.0,100.0,100.0,13
+keeshond,Keeshond,100.0,100.0,100.0,12
+papillon,Papillon,100.0,100.0,100.0,15
+pomeranian,Pomeranian,100.0,100.0,100.0,17
+ibizan_hound,Ibizan Hound,100.0,92.9,96.3,14
+old_english_sheepdog,Old English Sheepdog,92.9,100.0,96.3,13
+saint_bernard,Saint Bernard,92.9,100.0,96.3,13
+groenendael,Groenendael,92.3,100.0,96.0,12
+gordon_setter,Gordon Setter,100.0,91.7,95.7,12
+mexican_hairless,Mexican Hairless,100.0,91.7,95.7,12
+sussex_spaniel,Sussex Spaniel,91.7,100.0,95.7,11
+komondor,Komondor,100.0,90.0,94.7,10
+miniature_pinscher,Miniature Pinscher,93.8,93.8,93.8,16
+chow,Chow,92.9,92.9,92.9,14
+dandie_dinmont,Dandie Dinmont,92.9,92.9,92.9,14
+weimaraner,Weimaraner,92.3,92.3,92.3,13
+schipperke,Schipperke,100.0,84.6,91.7,13
+dhole,Dhole,90.9,90.9,90.9,11
+english_springer,English Springer,90.9,90.9,90.9,11
+irish_water_spaniel,Irish Water Spaniel,90.9,90.9,90.9,11
+kerry_blue_terrier,Kerry Blue Terrier,100.0,83.3,90.9,12
+blenheim_spaniel,Blenheim Spaniel,93.3,87.5,90.3,16
+japanese_spaniel,Japanese Spaniel,93.3,87.5,90.3,16
+malinois,Malinois,100.0,81.8,90.0,11
+otterhound,Otterhound,90.0,90.0,90.0,10
+bedlington_terrier,Bedlington Terrier,86.7,92.9,89.7,14
+leonberg,Leonberg,80.0,100.0,88.9,16
+bernese_mountain_dog,Bernese Mountain Dog,88.2,88.2,88.2,17
+clumber,Clumber,84.6,91.7,88.0,12
+basenji,Basenji,93.3,82.4,87.5,17
+border_collie,Border Collie,83.3,90.9,87.0,11
+bull_mastiff,Bull Mastiff,83.3,90.9,87.0,11
+saluki,Saluki,86.7,86.7,86.7,15
+affenpinscher,Affenpinscher,100.0,75.0,85.7,12
+boston_bull,Boston Bull,80.0,92.3,85.7,13
+irish_setter,Irish Setter,80.0,92.3,85.7,13
+pug,Pug,91.7,78.6,84.6,14
+sealyham_terrier,Sealyham Terrier,84.6,84.6,84.6,13
+borzoi,Borzoi,100.0,72.7,84.2,11
+curly-coated_retriever,Curly Coated Retriever,100.0,72.7,84.2,11
+border_terrier,Border Terrier,76.5,92.9,83.9,14
+afghan_hound,Afghan Hound,73.9,94.4,82.9,18
+entlebucher,Entlebucher,87.5,77.8,82.4,18
+black-and-tan_coonhound,Black And Tan Coonhound,81.8,81.8,81.8,11
+bloodhound,Bloodhound,78.6,84.6,81.5,13
+bluetick,Bluetick,73.3,91.7,81.5,12
+kelpie,Kelpie,78.6,84.6,81.5,13
+norwegian_elkhound,Norwegian Elkhound,84.6,78.6,81.5,14
+scotch_terrier,Scotch Terrier,73.3,91.7,81.5,12
+airedale,Airedale,81.2,81.2,81.2,16
+bouvier_des_flandres,Bouvier Des Flandres,83.3,76.9,80.0,13
+brabancon_griffon,Brabancon Griffon,80.0,80.0,80.0,10
+doberman,Doberman,88.9,72.7,80.0,11
+english_setter,English Setter,76.9,83.3,80.0,12
+french_bulldog,French Bulldog,80.0,80.0,80.0,10
+german_short-haired_pointer,German Short Haired Pointer,88.9,72.7,80.0,11
+greater_swiss_mountain_dog,Greater Swiss Mountain Dog,70.6,92.3,80.0,13
+newfoundland,Newfoundland,90.9,71.4,80.0,14
+tibetan_mastiff,Tibetan Mastiff,80.0,80.0,80.0,10
+toy_terrier,Toy Terrier,76.9,83.3,80.0,12
+west_highland_white_terrier,West Highland White Terrier,66.7,100.0,80.0,12
+scottish_deerhound,Scottish Deerhound,78.9,78.9,78.9,19
+pembroke,Pembroke,68.4,92.9,78.8,14
+samoyed,Samoyed,81.2,76.5,78.8,17
+yorkshire_terrier,Yorkshire Terrier,73.3,84.6,78.6,13
+cocker_spaniel,Cocker Spaniel,75.0,81.8,78.3,11
+pekinese,Pekinese,75.0,81.8,78.3,11
+maltese_dog,Maltese Dog,81.2,72.2,76.5,18
+boxer,Boxer,80.0,72.7,76.2,11
+dingo,Dingo,88.9,66.7,76.2,12
+miniature_schnauzer,Miniature Schnauzer,80.0,72.7,76.2,11
+beagle,Beagle,66.7,87.5,75.7,16
+chesapeake_bay_retriever,Chesapeake Bay Retriever,81.8,69.2,75.0,13
+great_dane,Great Dane,69.2,81.8,75.0,11
+rottweiler,Rottweiler,69.2,81.8,75.0,11
+briard,Briard,77.8,70.0,73.7,10
+golden_retriever,Golden Retriever,77.8,70.0,73.7,10
+vizsla,Vizsla,77.8,70.0,73.7,10
+cairn,Cairn,78.6,68.8,73.3,16
+norfolk_terrier,Norfolk Terrier,61.1,91.7,73.3,12
+irish_terrier,Irish Terrier,88.9,61.5,72.7,13
+soft-coated_wheaten_terrier,Soft Coated Wheaten Terrier,66.7,80.0,72.7,10
+shih-tzu,Shih Tzu,63.6,82.4,71.8,17
+great_pyrenees,Great Pyrenees,57.7,88.2,69.8,17
+german_shepherd,German Shepherd,61.5,80.0,69.6,10
+shetland_sheepdog,Shetland Sheepdog,66.7,72.7,69.6,11
+english_foxhound,English Foxhound,69.2,69.2,69.2,13
+basset,Basset,66.7,66.7,66.7,12
+chihuahua,Chihuahua,75.0,60.0,66.7,10
+collie,Collie,72.7,61.5,66.7,13
+redbone,Redbone,70.0,63.6,66.7,11
+tibetan_terrier,Tibetan Terrier,60.0,75.0,66.7,16
+welsh_springer_spaniel,Welsh Springer Spaniel,77.8,58.3,66.7,12
+irish_wolfhound,Irish Wolfhound,57.9,73.3,64.7,15
+australian_terrier,Australian Terrier,66.7,62.5,64.5,16
+siberian_husky,Siberian Husky,58.8,71.4,64.5,14
+malamute,Malamute,56.2,75.0,64.3,12
+standard_poodle,Standard Poodle,56.2,75.0,64.3,12
+labrador_retriever,Labrador Retriever,66.7,61.5,64.0,13
+staffordshire_bullterrier,Staffordshire Bullterrier,61.5,66.7,64.0,12
+norwich_terrier,Norwich Terrier,75.0,54.5,63.2,11
+standard_schnauzer,Standard Schnauzer,75.0,54.5,63.2,11
+rhodesian_ridgeback,Rhodesian Ridgeback,61.5,61.5,61.5,13
+appenzeller,Appenzeller,66.7,54.5,60.0,11
+giant_schnauzer,Giant Schnauzer,60.0,60.0,60.0,10
+wire-haired_fox_terrier,Wire Haired Fox Terrier,85.7,46.2,60.0,13
+lakeland_terrier,Lakeland Terrier,77.8,46.7,58.3,15
+brittany_spaniel,Brittany Spaniel,60.0,54.5,57.1,11
+miniature_poodle,Miniature Poodle,66.7,50.0,57.1,12
+toy_poodle,Toy Poodle,66.7,50.0,57.1,12
+silky_terrier,Silky Terrier,50.0,64.3,56.2,14
+flat-coated_retriever,Flat Coated Retriever,54.5,54.5,54.5,11
+italian_greyhound,Italian Greyhound,43.5,71.4,54.1,14
+kuvasz,Kuvasz,80.0,40.0,53.3,10
+cardigan,Cardigan,62.5,45.5,52.6,11
+american_staffordshire_terrier,American Staffordshire Terrier,50.0,54.5,52.2,11
+whippet,Whippet,66.7,42.9,52.2,14
+lhasa,Lhasa,62.5,35.7,45.5,14
+walker_hound,Walker Hound,50.0,30.0,37.5,10
+eskimo_dog,Eskimo Dog,66.7,20.0,30.8,10

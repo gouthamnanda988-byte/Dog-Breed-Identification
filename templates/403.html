@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}403 — Access Denied{% endblock %}
+
+{% block content %}
+<div style="text-align:center; padding: 6rem 2rem;">
+  <div style="font-size: 5rem; margin-bottom: 1rem;">🚫</div>
+  <h1 style="color: var(--brown-dark); font-size: 2rem; margin-bottom: 0.5rem;">403 — Access Denied</h1>
+  <p style="color: var(--text-light); max-width: 480px; margin: 0 auto 2rem;">
+    This page is for administrators only. If you believe this is an error, please contact the site administrator.
+  </p>
+  <a href="{{ url_for('home') }}" style="
+      display: inline-block;
+      background: var(--brown);
+      color: #fff;
+      padding: 0.7rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+  ">← Back to Home</a>
+</div>
+{% endblock %}

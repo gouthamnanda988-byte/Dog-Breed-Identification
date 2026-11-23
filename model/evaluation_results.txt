@@ -1,0 +1,16 @@
+DOG BREED IDENTIFICATION -- Model Evaluation Report
+============================================================
+
+Model Architecture : MobileNetV2 Transfer Learning
+Number of Breeds   : 120
+Test Set Size      : 1534 images
+Test Accuracy      : 77.64%
+Top-5 Accuracy     : 96.87%
+Test Loss          : 0.7036
+
+Macro Precision    : 78.58%
+Macro Recall       : 76.98%
+Macro F1-Score     : 76.91%
+Weighted Precision : 78.75%
+Weighted Recall    : 77.64%
+Weighted F1-Score  : 77.35%

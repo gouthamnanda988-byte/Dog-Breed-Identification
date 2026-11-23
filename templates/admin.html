@@ -1,0 +1,373 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard – Dog Breed Identification{% endblock %}
+
+{% block content %}
+<div class="admin-page">
+
+  <!-- ========== PAGE HEADER ========== -->
+  <div class="admin-header">
+    <div class="admin-header-content">
+      <h1>🛡️ Admin Dashboard</h1>
+      <p class="admin-subtitle">Real-time statistics from the MySQL database</p>
+    </div>
+    <span class="admin-badge">Administrator Access</span>
+  </div>
+
+  <!-- ========== SUMMARY CARDS ROW ========== -->
+  <div class="admin-cards">
+
+    <div class="admin-card">
+      <div class="admin-card-icon">👥</div>
+      <div class="admin-card-body">
+        <div class="admin-card-value">{{ stats.total_users }}</div>
+        <div class="admin-card-label">Registered Users</div>
+      </div>
+    </div>
+
+    <div class="admin-card">
+      <div class="admin-card-icon">🔍</div>
+      <div class="admin-card-body">
+        <div class="admin-card-value">{{ stats.total_predictions }}</div>
+        <div class="admin-card-label">Total Predictions</div>
+      </div>
+    </div>
+
+    <div class="admin-card">
+      <div class="admin-card-icon">💬</div>
+      <div class="admin-card-body">
+        <div class="admin-card-value">{{ stats.total_feedback }}</div>
+        <div class="admin-card-label">Feedback Received</div>
+      </div>
+    </div>
+
+    <div class="admin-card">
+      <div class="admin-card-icon">⭐</div>
+      <div class="admin-card-body">
+        <div class="admin-card-value">
+          {% if stats.avg_rating > 0 %}
+            {{ stats.avg_rating }}/5
+          {% else %}
+            N/A
+          {% endif %}
+        </div>
+        <div class="admin-card-label">Avg. Feedback Rating</div>
+      </div>
+    </div>
+
+    <div class="admin-card">
+      <div class="admin-card-icon">🎯</div>
+      <div class="admin-card-body">
+        <div class="admin-card-value">{{ stats.avg_confidence }}%</div>
+        <div class="admin-card-label">Avg. Prediction Confidence</div>
+      </div>
+    </div>
+
+    <div class="admin-card">
+      <div class="admin-card-icon">🧠</div>
+      <div class="admin-card-body">
+        <div class="admin-card-value">
+          {% if stats.model_versions %}
+            {{ stats.model_versions[0].model_version }}
+          {% else %}
+            N/A
+          {% endif %}
+        </div>
+        <div class="admin-card-label">Primary Model Version</div>
+      </div>
+    </div>
+
+  </div><!-- /.admin-cards -->
+
+  <!-- ========== CHARTS ROW ========== -->
+  <div class="admin-charts-row">
+
+    <!-- Top Breeds Bar Chart -->
+    <div class="admin-chart-card">
+      <h2 class="admin-section-title">📊 Top Predicted Breeds</h2>
+      <p class="admin-chart-note">
+        {% if stats.top_breeds %}
+          Top {{ stats.top_breeds | length }} most frequently predicted breeds from MySQL.
+        {% else %}
+          No predictions recorded yet.
+        {% endif %}
+      </p>
+      <div class="admin-chart-wrapper">
+        <canvas id="topBreedsChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Daily Predictions Line Chart -->
+    <div class="admin-chart-card">
+      <h2 class="admin-section-title">📈 Predictions – Last 14 Days</h2>
+      <p class="admin-chart-note">Daily prediction count from MySQL (current calendar window).</p>
+      <div class="admin-chart-wrapper">
+        <canvas id="dailyChart"></canvas>
+      </div>
+    </div>
+
+  </div><!-- /.admin-charts-row -->
+
+  <!-- ========== MODEL VERSION TABLE ========== -->
+  {% if stats.model_versions %}
+  <div class="admin-section-card">
+    <h2 class="admin-section-title">🧠 Model Version Breakdown</h2>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Model Version</th>
+          <th>Predictions Logged</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for mv in stats.model_versions %}
+        <tr>
+          <td><code>{{ mv.model_version }}</code></td>
+          <td>{{ mv.cnt }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% endif %}
+
+  <!-- ========== RECENT USERS TABLE ========== -->
+  <div class="admin-section-card">
+    <h2 class="admin-section-title">👥 Recently Registered Users</h2>
+    {% if stats.recent_users %}
+    <div class="admin-table-wrapper">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>#ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Registered</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for u in stats.recent_users %}
+          <tr id="user-row-{{ u.user_id }}">
+            <td>{{ u.user_id }}</td>
+            <td>{{ u.username }}</td>
+            <td>{{ u.email }}</td>
+            <td>
+              <span class="role-badge {% if u.is_admin %}role-admin{% else %}role-user{% endif %}">
+                {% if u.is_admin %}🛡️ Admin{% else %}👤 User{% endif %}
+              </span>
+            </td>
+            <td>{{ u.created_at.strftime('%d %b %Y') if u.created_at else '—' }}</td>
+            <td>
+              {% if not u.is_admin %}
+              <button class="btn-grant-admin"
+                      onclick="toggleAdmin({{ u.user_id }}, 'grant', this)"
+                      title="Grant admin to {{ u.username }}">
+                Grant Admin
+              </button>
+              {% else %}
+              <button class="btn-revoke-admin"
+                      onclick="toggleAdmin({{ u.user_id }}, 'revoke', this)"
+                      title="Revoke admin from {{ u.username }}">
+                Revoke Admin
+              </button>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="admin-empty">No users registered yet.</p>
+    {% endif %}
+  </div>
+
+  <!-- ========== RECENT FEEDBACK ========== -->
+  <div class="admin-section-card">
+    <h2 class="admin-section-title">💬 Recent Feedback</h2>
+    {% if stats.recent_feedback %}
+    <div class="admin-table-wrapper">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>User</th>
+            <th>Rating</th>
+            <th>Message</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for fb in stats.recent_feedback %}
+          <tr>
+            <td>{{ fb.feedback_id }}</td>
+            <td>{{ fb.username }}</td>
+            <td>
+              <span class="star-rating" title="{{ fb.rating }}/5">
+                {% for i in range(1, 6) %}
+                  {% if i <= fb.rating %}⭐{% else %}☆{% endif %}
+                {% endfor %}
+              </span>
+            </td>
+            <td class="feedback-msg">{{ fb.message[:120] }}{% if fb.message|length > 120 %}…{% endif %}</td>
+            <td>{{ fb.created_at.strftime('%d %b %Y') if fb.created_at else '—' }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="admin-empty">No feedback submitted yet.</p>
+    {% endif %}
+  </div>
+
+</div><!-- /.admin-page -->
+
+<!-- ========== CHART.JS CDN ========== -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script>
+/* ---- Colour palette matching the cream/brown theme ---- */
+const BROWN       = '#8B5E3C';
+const BROWN_DARK  = '#6B4226';
+const BROWN_LIGHT = '#A67C52';
+const CREAM       = '#FDF6EC';
+const ACCENT      = '#D4956A';
+const ACCENT2     = '#C67B4D';
+
+Chart.defaults.font.family = "'Segoe UI', 'Arial', sans-serif";
+Chart.defaults.color       = '#5a4a3a';
+
+/* ---- Top Breeds Horizontal Bar Chart ---- */
+const breedLabels = {{ stats.breed_chart_labels | tojson }};
+const breedData   = {{ stats.breed_chart_data   | tojson }};
+
+if (breedLabels.length > 0) {
+  const bCtx = document.getElementById('topBreedsChart').getContext('2d');
+  new Chart(bCtx, {
+    type: 'bar',
+    data: {
+      labels: breedLabels,
+      datasets: [{
+        label: 'Times Predicted',
+        data: breedData,
+        backgroundColor: breedLabels.map((_, i) =>
+          i === 0 ? BROWN_DARK :
+          i === 1 ? BROWN      :
+          i === 2 ? BROWN_LIGHT:
+                    ACCENT
+        ),
+        borderColor: BROWN_DARK,
+        borderWidth: 1,
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.raw} prediction${ctx.raw !== 1 ? 's' : ''}`
+          }
+        }
+      },
+      scales: {
+        x: {
+          beginAtZero: true,
+          ticks: { stepSize: 1, precision: 0 },
+          grid: { color: 'rgba(139,94,60,0.12)' }
+        },
+        y: {
+          grid: { display: false }
+        }
+      }
+    }
+  });
+} else {
+  document.getElementById('topBreedsChart').parentElement.innerHTML =
+    '<p class="admin-empty" style="padding:2rem;">No predictions recorded yet.</p>';
+}
+
+/* ---- Daily Predictions Line Chart ---- */
+const dailyLabels = {{ stats.daily_labels | tojson }};
+const dailyData   = {{ stats.daily_data   | tojson }};
+
+if (dailyLabels.length > 0) {
+  const dCtx = document.getElementById('dailyChart').getContext('2d');
+  new Chart(dCtx, {
+    type: 'line',
+    data: {
+      labels: dailyLabels,
+      datasets: [{
+        label: 'Predictions',
+        data: dailyData,
+        borderColor: BROWN,
+        backgroundColor: 'rgba(139,94,60,0.15)',
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: BROWN_DARK,
+        pointRadius: 5,
+        pointHoverRadius: 7
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ` ${ctx.raw} prediction${ctx.raw !== 1 ? 's' : ''}`
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { stepSize: 1, precision: 0 },
+          grid: { color: 'rgba(139,94,60,0.12)' }
+        },
+        x: {
+          grid: { display: false }
+        }
+      }
+    }
+  });
+} else {
+  document.getElementById('dailyChart').parentElement.innerHTML =
+    '<p class="admin-empty" style="padding:2rem;">No predictions in the last 14 days.</p>';
+}
+
+/* ---- Grant / Revoke Admin AJAX ---- */
+function toggleAdmin(userId, action, btn) {
+  if (!confirm(`Are you sure you want to ${action} admin for user #${userId}?`)) return;
+  btn.disabled = true;
+  btn.textContent = '…';
+
+  fetch("{{ url_for('admin_grant') }}", {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ user_id: userId, action: action })
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (data.success) {
+      location.reload();
+    } else {
+      alert('Error: ' + data.message);
+      btn.disabled = false;
+      btn.textContent = action === 'grant' ? 'Grant Admin' : 'Revoke Admin';
+    }
+  })
+  .catch(() => {
+    alert('Network error. Please try again.');
+    btn.disabled = false;
+    btn.textContent = action === 'grant' ? 'Grant Admin' : 'Revoke Admin';
+  });
+}
+</script>
+{% endblock %}

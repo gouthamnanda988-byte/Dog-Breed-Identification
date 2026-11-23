@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}Identify Breed - Dog Breed Identification{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>📷 Identify Dog Breed</h1>
+    <p>Upload a dog photo and let our model predict the breed</p>
+</section>
+
+<div class="container">
+    <section class="section">
+
+        <!-- ========== Upload Area ========== -->
+        <div class="upload-wrapper">
+
+            <!-- Drop Zone -->
+            <div class="drop-zone" id="dropZone">
+                <div class="drop-zone-prompt" id="dropPrompt">
+                    <div class="drop-zone-icon">📁</div>
+                    <h3>Drag & Drop your dog image here</h3>
+                    <p>or click the button below to browse</p>
+                    <p class="drop-zone-formats">Supported formats: JPG, JPEG, PNG</p>
+                </div>
+
+                <!-- Hidden file input -->
+                <input
+                    type="file"
+                    id="fileInput"
+                    accept=".jpg,.jpeg,.png"
+                    hidden
+                />
+
+                <button type="button" class="btn btn-choose" id="chooseBtn">
+                    🖼️ Choose Image
+                </button>
+            </div>
+
+            <!-- Error Message -->
+            <div class="upload-error" id="uploadError"></div>
+
+            <!-- ========== Preview Area (hidden by default) ========== -->
+            <div class="preview-area" id="previewArea">
+                <div class="preview-image-box">
+                    <img id="previewImg" src="" alt="Uploaded dog image" />
+                </div>
+
+                <div class="preview-info">
+                    <h3>📄 Image Details</h3>
+                    <div class="info-row">
+                        <span class="info-label">File Name:</span>
+                        <span class="info-value" id="fileName">—</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">File Size:</span>
+                        <span class="info-value" id="fileSize">—</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">File Type:</span>
+                        <span class="info-value" id="fileType">—</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Dimensions:</span>
+                        <span class="info-value" id="fileDimensions">—</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="preview-actions">
+                    <button type="button" class="btn btn-predict" id="predictBtn">
+                        🔍 Predict Breed
+                    </button>
+                    <button type="button" class="btn btn-reset" id="resetBtn">
+                        ↩️ Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- ========== Loading Indicator ========== -->
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="loading-box">
+                    <div class="spinner"></div>
+                    <p>Analyzing image...</p>
+                    <p class="loading-sub">Please wait while the model processes your photo</p>
+                </div>
+            </div>
+
+            <!-- ========== Result Area ========== -->
+            <div class="result-area" id="resultArea"></div>
+
+        </div>
+
+        <!-- ========== Instructions ========== -->
+        <div class="content-card" style="margin-top: 30px;">
+            <h2>📝 How to Use</h2>
+            <ol>
+                <li>Drag and drop a dog image onto the upload area, or click <strong>Choose Image</strong> to browse your files.</li>
+                <li>Only <strong>JPG, JPEG, and PNG</strong> images are accepted.</li>
+                <li>Check the image preview and file details to make sure it looks correct.</li>
+                <li>Click <strong>Predict Breed</strong> to send the image for analysis.</li>
+                <li>Use <strong>Reset</strong> to clear the image and start over.</li>
+            </ol>
+            <div class="info-box">
+                <strong>Note:</strong> The MobileNetV2 deep learning model is active.
+                Upload any clear photo of a dog to identify its breed and view the top 3 predicted classes with confidence scores.
+            </div>
+        </div>
+
+    </section>
+</div>
+
+{% endblock %}

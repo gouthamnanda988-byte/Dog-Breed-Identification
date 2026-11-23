@@ -1,0 +1,1404 @@
+{
+  "model_info": {
+    "architecture": "MobileNetV2 (Transfer Learning)",
+    "framework": "TensorFlow / Keras",
+    "input_shape": [
+      224,
+      224,
+      3
+    ],
+    "total_classes": 120,
+    "dataset_split": "70% Train / 15% Val / 15% Test",
+    "train_samples": 7155,
+    "val_samples": 1533,
+    "test_samples": 1534
+  },
+  "overall": {
+    "test_loss": 0.7036,
+    "test_accuracy": 77.64,
+    "top5_accuracy": 96.87,
+    "precision_macro": 78.58,
+    "recall_macro": 76.98,
+    "f1_macro": 76.91,
+    "precision_weighted": 78.75,
+    "recall_weighted": 77.64,
+    "f1_weighted": 77.35
+  },
+  "history": {
+    "epochs": [
+      "Epoch 1",
+      "Epoch 2",
+      "Epoch 3",
+      "Epoch 4",
+      "Epoch 5",
+      "Epoch 6",
+      "Epoch 7",
+      "Epoch 8",
+      "Epoch 9",
+      "Epoch 10",
+      "Epoch 11",
+      "Epoch 12",
+      "Epoch 13",
+      "Epoch 14",
+      "Epoch 15"
+    ],
+    "train_accuracy": [
+      0.312,
+      0.524,
+      0.638,
+      0.705,
+      0.748,
+      0.781,
+      0.804,
+      0.822,
+      0.839,
+      0.852,
+      0.871,
+      0.889,
+      0.902,
+      0.914,
+      0.923
+    ],
+    "val_accuracy": [
+      0.485,
+      0.612,
+      0.684,
+      0.725,
+      0.751,
+      0.772,
+      0.784,
+      0.791,
+      0.796,
+      0.801,
+      0.808,
+      0.814,
+      0.819,
+      0.821,
+      0.824
+    ],
+    "train_loss": [
+      2.984,
+      1.842,
+      1.356,
+      1.092,
+      0.912,
+      0.784,
+      0.692,
+      0.618,
+      0.559,
+      0.512,
+      0.452,
+      0.398,
+      0.354,
+      0.318,
+      0.288
+    ],
+    "val_loss": [
+      2.124,
+      1.482,
+      1.185,
+      1.014,
+      0.912,
+      0.838,
+      0.789,
+      0.754,
+      0.729,
+      0.714,
+      0.692,
+      0.678,
+      0.669,
+      0.664,
+      0.661
+    ]
+  },
+  "top_confusions": [
+    {
+      "no": 1,
+      "actual_breed": "Whippet",
+      "predicted_breed": "Italian Greyhound",
+      "count": 7,
+      "count_str": "7 images",
+      "reason": "Identical slender sighthound posture and sleek coat."
+    },
+    {
+      "no": 2,
+      "actual_breed": "Lhasa",
+      "predicted_breed": "Shih-Tzu",
+      "count": 6,
+      "count_str": "6 images",
+      "reason": "Closely related Tibetan companion dogs with similar long facial hair."
+    },
+    {
+      "no": 3,
+      "actual_breed": "Eskimo Dog",
+      "predicted_breed": "Siberian Husky",
+      "count": 5,
+      "count_str": "5 images",
+      "reason": "Arctic spitz breeds with erect ears, thick double coats, and curled tails."
+    },
+    {
+      "no": 4,
+      "actual_breed": "Australian Terrier",
+      "predicted_breed": "Silky Terrier",
+      "count": 4,
+      "count_str": "4 images",
+      "reason": "Related terrier types sharing wiry/silky coats and similar silhouettes."
+    },
+    {
+      "no": 5,
+      "actual_breed": "Kuvasz",
+      "predicted_breed": "Great Pyrenees",
+      "count": 4,
+      "count_str": "4 images",
+      "reason": "Large flock-guarding breeds with solid white, thick coats."
+    },
+    {
+      "no": 6,
+      "actual_breed": "Maltese Dog",
+      "predicted_breed": "West Highland White Terrier",
+      "count": 4,
+      "count_str": "4 images",
+      "reason": "Similar fine-grained facial features, fur texture, and color."
+    },
+    {
+      "no": 7,
+      "actual_breed": "Samoyed",
+      "predicted_breed": "Great Pyrenees",
+      "count": 4,
+      "count_str": "4 images",
+      "reason": "Large breeds sharing solid white, fluffy double coats."
+    },
+    {
+      "no": 8,
+      "actual_breed": "Staffordshire Bullterrier",
+      "predicted_breed": "American Staffordshire Terrier",
+      "count": 4,
+      "count_str": "4 images",
+      "reason": "Closely related bully breeds sharing blocky heads, muscular frames, and short coats."
+    },
+    {
+      "no": 9,
+      "actual_breed": "Cardigan",
+      "predicted_breed": "Pembroke",
+      "count": 3,
+      "count_str": "3 images",
+      "reason": "Both Welsh Corgi breeds, differing mainly in tail and ear shape."
+    },
+    {
+      "no": 10,
+      "actual_breed": "Collie",
+      "predicted_breed": "Shetland Sheepdog",
+      "count": 3,
+      "count_str": "3 images",
+      "reason": "Herding breeds sharing similar facial markings and fluffy ruffs."
+    },
+    {
+      "no": 11,
+      "actual_breed": "Irish Wolfhound",
+      "predicted_breed": "Scottish Deerhound",
+      "count": 3,
+      "count_str": "3 images",
+      "reason": "Similar body structure, coat texture, and appearance."
+    },
+    {
+      "no": 12,
+      "actual_breed": "Lakeland Terrier",
+      "predicted_breed": "Soft-Coated Wheaten Terrier",
+      "count": 3,
+      "count_str": "3 images",
+      "reason": "Similar tan/wheaten coat colors and bearded facial profiles."
+    }
+  ],
+  "top_performing_breeds": [
+    {
+      "breed": "african_hunting_dog",
+      "name": "African Hunting Dog",
+      "precision": 100.0,
+      "recall": 100.0,
+      "f1_score": 100.0,
+      "support": 13
+    },
+    {
+      "breed": "keeshond",
+      "name": "Keeshond",
+      "precision": 100.0,
+      "recall": 100.0,
+      "f1_score": 100.0,
+      "support": 12
+    },
+    {
+      "breed": "papillon",
+      "name": "Papillon",
+      "precision": 100.0,
+      "recall": 100.0,
+      "f1_score": 100.0,
+      "support": 15
+    },
+    {
+      "breed": "pomeranian",
+      "name": "Pomeranian",
+      "precision": 100.0,
+      "recall": 100.0,
+      "f1_score": 100.0,
+      "support": 17
+    },
+    {
+      "breed": "ibizan_hound",
+      "name": "Ibizan Hound",
+      "precision": 100.0,
+      "recall": 92.9,
+      "f1_score": 96.3,
+      "support": 14
+    },
+    {
+      "breed": "old_english_sheepdog",
+      "name": "Old English Sheepdog",
+      "precision": 92.9,
+      "recall": 100.0,
+      "f1_score": 96.3,
+      "support": 13
+    },
+    {
+      "breed": "saint_bernard",
+      "name": "Saint Bernard",
+      "precision": 92.9,
+      "recall": 100.0,
+      "f1_score": 96.3,
+      "support": 13
+    },
+    {
+      "breed": "groenendael",
+      "name": "Groenendael",
+      "precision": 92.3,
+      "recall": 100.0,
+      "f1_score": 96.0,
+      "support": 12
+    }
+  ],
+  "challenging_breeds": [
+    {
+      "breed": "italian_greyhound",
+      "name": "Italian Greyhound",
+      "precision": 43.5,
+      "recall": 71.4,
+      "f1_score": 54.1,
+      "support": 14
+    },
+    {
+      "breed": "kuvasz",
+      "name": "Kuvasz",
+      "precision": 80.0,
+      "recall": 40.0,
+      "f1_score": 53.3,
+      "support": 10
+    },
+    {
+      "breed": "cardigan",
+      "name": "Cardigan",
+      "precision": 62.5,
+      "recall": 45.5,
+      "f1_score": 52.6,
+      "support": 11
+    },
+    {
+      "breed": "american_staffordshire_terrier",
+      "name": "American Staffordshire Terrier",
+      "precision": 50.0,
+      "recall": 54.5,
+      "f1_score": 52.2,
+      "support": 11
+    },
+    {
+      "breed": "whippet",
+      "name": "Whippet",
+      "precision": 66.7,
+      "recall": 42.9,
+      "f1_score": 52.2,
+      "support": 14
+    },
+    {
+      "breed": "lhasa",
+      "name": "Lhasa",
+      "precision": 62.5,
+      "recall": 35.7,
+      "f1_score": 45.5,
+      "support": 14
+    },
+    {
+      "breed": "walker_hound",
+      "name": "Walker Hound",
+      "precision": 50.0,
+      "recall": 30.0,
+      "f1_score": 37.5,
+      "support": 10
+    },
+    {
+      "breed": "eskimo_dog",
+      "name": "Eskimo Dog",
+      "precision": 66.7,
+      "recall": 20.0,
+      "f1_score": 30.8,
+      "support": 10
+    }
+  ],
+  "per_class": [
+    {
+      "breed": "african_hunting_dog",
+      "name": "African Hunting Dog",
+      "precision": 100.0,
+      "recall": 100.0,
+      "f1_score": 100.0,
+      "support": 13
+    },
+    {
+      "breed": "keeshond",
+      "name": "Keeshond",
+      "precision": 100.0,
+      "recall": 100.0,
+      "f1_score": 100.0,
+      "support": 12
+    },
+    {
+      "breed": "papillon",
+      "name": "Papillon",
+      "precision": 100.0,
+      "recall": 100.0,
+      "f1_score": 100.0,
+      "support": 15
+    },
+    {
+      "breed": "pomeranian",
+      "name": "Pomeranian",
+      "precision": 100.0,
+      "recall": 100.0,
+      "f1_score": 100.0,
+      "support": 17
+    },
+    {
+      "breed": "ibizan_hound",
+      "name": "Ibizan Hound",
+      "precision": 100.0,
+      "recall": 92.9,
+      "f1_score": 96.3,
+      "support": 14
+    },
+    {
+      "breed": "old_english_sheepdog",
+      "name": "Old English Sheepdog",
+      "precision": 92.9,
+      "recall": 100.0,
+      "f1_score": 96.3,
+      "support": 13
+    },
+    {
+      "breed": "saint_bernard",
+      "name": "Saint Bernard",
+      "precision": 92.9,
+      "recall": 100.0,
+      "f1_score": 96.3,
+      "support": 13
+    },
+    {
+      "breed": "groenendael",
+      "name": "Groenendael",
+      "precision": 92.3,
+      "recall": 100.0,
+      "f1_score": 96.0,
+      "support": 12
+    },
+    {
+      "breed": "gordon_setter",
+      "name": "Gordon Setter",
+      "precision": 100.0,
+      "recall": 91.7,
+      "f1_score": 95.7,
+      "support": 12
+    },
+    {
+      "breed": "mexican_hairless",
+      "name": "Mexican Hairless",
+      "precision": 100.0,
+      "recall": 91.7,
+      "f1_score": 95.7,
+      "support": 12
+    },
+    {
+      "breed": "sussex_spaniel",
+      "name": "Sussex Spaniel",
+      "precision": 91.7,
+      "recall": 100.0,
+      "f1_score": 95.7,
+      "support": 11
+    },
+    {
+      "breed": "komondor",
+      "name": "Komondor",
+      "precision": 100.0,
+      "recall": 90.0,
+      "f1_score": 94.7,
+      "support": 10
+    },
+    {
+      "breed": "miniature_pinscher",
+      "name": "Miniature Pinscher",
+      "precision": 93.8,
+      "recall": 93.8,
+      "f1_score": 93.8,
+      "support": 16
+    },
+    {
+      "breed": "chow",
+      "name": "Chow",
+      "precision": 92.9,
+      "recall": 92.9,
+      "f1_score": 92.9,
+      "support": 14
+    },
+    {
+      "breed": "dandie_dinmont",
+      "name": "Dandie Dinmont",
+      "precision": 92.9,
+      "recall": 92.9,
+      "f1_score": 92.9,
+      "support": 14
+    },
+    {
+      "breed": "weimaraner",
+      "name": "Weimaraner",
+      "precision": 92.3,
+      "recall": 92.3,
+      "f1_score": 92.3,
+      "support": 13
+    },
+    {
+      "breed": "schipperke",
+      "name": "Schipperke",
+      "precision": 100.0,
+      "recall": 84.6,
+      "f1_score": 91.7,
+      "support": 13
+    },
+    {
+      "breed": "dhole",
+      "name": "Dhole",
+      "precision": 90.9,
+      "recall": 90.9,
+      "f1_score": 90.9,
+      "support": 11
+    },
+    {
+      "breed": "english_springer",
+      "name": "English Springer",
+      "precision": 90.9,
+      "recall": 90.9,
+      "f1_score": 90.9,
+      "support": 11
+    },
+    {
+      "breed": "irish_water_spaniel",
+      "name": "Irish Water Spaniel",
+      "precision": 90.9,
+      "recall": 90.9,
+      "f1_score": 90.9,
+      "support": 11
+    },
+    {
+      "breed": "kerry_blue_terrier",
+      "name": "Kerry Blue Terrier",
+      "precision": 100.0,
+      "recall": 83.3,
+      "f1_score": 90.9,
+      "support": 12
+    },
+    {
+      "breed": "blenheim_spaniel",
+      "name": "Blenheim Spaniel",
+      "precision": 93.3,
+      "recall": 87.5,
+      "f1_score": 90.3,
+      "support": 16
+    },
+    {
+      "breed": "japanese_spaniel",
+      "name": "Japanese Spaniel",
+      "precision": 93.3,
+      "recall": 87.5,
+      "f1_score": 90.3,
+      "support": 16
+    },
+    {
+      "breed": "malinois",
+      "name": "Malinois",
+      "precision": 100.0,
+      "recall": 81.8,
+      "f1_score": 90.0,
+      "support": 11
+    },
+    {
+      "breed": "otterhound",
+      "name": "Otterhound",
+      "precision": 90.0,
+      "recall": 90.0,
+      "f1_score": 90.0,
+      "support": 10
+    },
+    {
+      "breed": "bedlington_terrier",
+      "name": "Bedlington Terrier",
+      "precision": 86.7,
+      "recall": 92.9,
+      "f1_score": 89.7,
+      "support": 14
+    },
+    {
+      "breed": "leonberg",
+      "name": "Leonberg",
+      "precision": 80.0,
+      "recall": 100.0,
+      "f1_score": 88.9,
+      "support": 16
+    },
+    {
+      "breed": "bernese_mountain_dog",
+      "name": "Bernese Mountain Dog",
+      "precision": 88.2,
+      "recall": 88.2,
+      "f1_score": 88.2,
+      "support": 17
+    },
+    {
+      "breed": "clumber",
+      "name": "Clumber",
+      "precision": 84.6,
+      "recall": 91.7,
+      "f1_score": 88.0,
+      "support": 12
+    },
+    {
+      "breed": "basenji",
+      "name": "Basenji",
+      "precision": 93.3,
+      "recall": 82.4,
+      "f1_score": 87.5,
+      "support": 17
+    },
+    {
+      "breed": "border_collie",
+      "name": "Border Collie",
+      "precision": 83.3,
+      "recall": 90.9,
+      "f1_score": 87.0,
+      "support": 11
+    },
+    {
+      "breed": "bull_mastiff",
+      "name": "Bull Mastiff",
+      "precision": 83.3,
+      "recall": 90.9,
+      "f1_score": 87.0,
+      "support": 11
+    },
+    {
+      "breed": "saluki",
+      "name": "Saluki",
+      "precision": 86.7,
+      "recall": 86.7,
+      "f1_score": 86.7,
+      "support": 15
+    },
+    {
+      "breed": "affenpinscher",
+      "name": "Affenpinscher",
+      "precision": 100.0,
+      "recall": 75.0,
+      "f1_score": 85.7,
+      "support": 12
+    },
+    {
+      "breed": "boston_bull",
+      "name": "Boston Bull",
+      "precision": 80.0,
+      "recall": 92.3,
+      "f1_score": 85.7,
+      "support": 13
+    },
+    {
+      "breed": "irish_setter",
+      "name": "Irish Setter",
+      "precision": 80.0,
+      "recall": 92.3,
+      "f1_score": 85.7,
+      "support": 13
+    },
+    {
+      "breed": "pug",
+      "name": "Pug",
+      "precision": 91.7,
+      "recall": 78.6,
+      "f1_score": 84.6,
+      "support": 14
+    },
+    {
+      "breed": "sealyham_terrier",
+      "name": "Sealyham Terrier",
+      "precision": 84.6,
+      "recall": 84.6,
+      "f1_score": 84.6,
+      "support": 13
+    },
+    {
+      "breed": "borzoi",
+      "name": "Borzoi",
+      "precision": 100.0,
+      "recall": 72.7,
+      "f1_score": 84.2,
+      "support": 11
+    },
+    {
+      "breed": "curly-coated_retriever",
+      "name": "Curly Coated Retriever",
+      "precision": 100.0,
+      "recall": 72.7,
+      "f1_score": 84.2,
+      "support": 11
+    },
+    {
+      "breed": "border_terrier",
+      "name": "Border Terrier",
+      "precision": 76.5,
+      "recall": 92.9,
+      "f1_score": 83.9,
+      "support": 14
+    },
+    {
+      "breed": "afghan_hound",
+      "name": "Afghan Hound",
+      "precision": 73.9,
+      "recall": 94.4,
+      "f1_score": 82.9,
+      "support": 18
+    },
+    {
+      "breed": "entlebucher",
+      "name": "Entlebucher",
+      "precision": 87.5,
+      "recall": 77.8,
+      "f1_score": 82.4,
+      "support": 18
+    },
+    {
+      "breed": "black-and-tan_coonhound",
+      "name": "Black And Tan Coonhound",
+      "precision": 81.8,
+      "recall": 81.8,
+      "f1_score": 81.8,
+      "support": 11
+    },
+    {
+      "breed": "bloodhound",
+      "name": "Bloodhound",
+      "precision": 78.6,
+      "recall": 84.6,
+      "f1_score": 81.5,
+      "support": 13
+    },
+    {
+      "breed": "bluetick",
+      "name": "Bluetick",
+      "precision": 73.3,
+      "recall": 91.7,
+      "f1_score": 81.5,
+      "support": 12
+    },
+    {
+      "breed": "kelpie",
+      "name": "Kelpie",
+      "precision": 78.6,
+      "recall": 84.6,
+      "f1_score": 81.5,
+      "support": 13
+    },
+    {
+      "breed": "norwegian_elkhound",
+      "name": "Norwegian Elkhound",
+      "precision": 84.6,
+      "recall": 78.6,
+      "f1_score": 81.5,
+      "support": 14
+    },
+    {
+      "breed": "scotch_terrier",
+      "name": "Scotch Terrier",
+      "precision": 73.3,
+      "recall": 91.7,
+      "f1_score": 81.5,
+      "support": 12
+    },
+    {
+      "breed": "airedale",
+      "name": "Airedale",
+      "precision": 81.2,
+      "recall": 81.2,
+      "f1_score": 81.2,
+      "support": 16
+    },
+    {
+      "breed": "bouvier_des_flandres",
+      "name": "Bouvier Des Flandres",
+      "precision": 83.3,
+      "recall": 76.9,
+      "f1_score": 80.0,
+      "support": 13
+    },
+    {
+      "breed": "brabancon_griffon",
+      "name": "Brabancon Griffon",
+      "precision": 80.0,
+      "recall": 80.0,
+      "f1_score": 80.0,
+      "support": 10
+    },
+    {
+      "breed": "doberman",
+      "name": "Doberman",
+      "precision": 88.9,
+      "recall": 72.7,
+      "f1_score": 80.0,
+      "support": 11
+    },
+    {
+      "breed": "english_setter",
+      "name": "English Setter",
+      "precision": 76.9,
+      "recall": 83.3,
+      "f1_score": 80.0,
+      "support": 12
+    },
+    {
+      "breed": "french_bulldog",
+      "name": "French Bulldog",
+      "precision": 80.0,
+      "recall": 80.0,
+      "f1_score": 80.0,
+      "support": 10
+    },
+    {
+      "breed": "german_short-haired_pointer",
+      "name": "German Short Haired Pointer",
+      "precision": 88.9,
+      "recall": 72.7,
+      "f1_score": 80.0,
+      "support": 11
+    },
+    {
+      "breed": "greater_swiss_mountain_dog",
+      "name": "Greater Swiss Mountain Dog",
+      "precision": 70.6,
+      "recall": 92.3,
+      "f1_score": 80.0,
+      "support": 13
+    },
+    {
+      "breed": "newfoundland",
+      "name": "Newfoundland",
+      "precision": 90.9,
+      "recall": 71.4,
+      "f1_score": 80.0,
+      "support": 14
+    },
+    {
+      "breed": "tibetan_mastiff",
+      "name": "Tibetan Mastiff",
+      "precision": 80.0,
+      "recall": 80.0,
+      "f1_score": 80.0,
+      "support": 10
+    },
+    {
+      "breed": "toy_terrier",
+      "name": "Toy Terrier",
+      "precision": 76.9,
+      "recall": 83.3,
+      "f1_score": 80.0,
+      "support": 12
+    },
+    {
+      "breed": "west_highland_white_terrier",
+      "name": "West Highland White Terrier",
+      "precision": 66.7,
+      "recall": 100.0,
+      "f1_score": 80.0,
+      "support": 12
+    },
+    {
+      "breed": "scottish_deerhound",
+      "name": "Scottish Deerhound",
+      "precision": 78.9,
+      "recall": 78.9,
+      "f1_score": 78.9,
+      "support": 19
+    },
+    {
+      "breed": "pembroke",
+      "name": "Pembroke",
+      "precision": 68.4,
+      "recall": 92.9,
+      "f1_score": 78.8,
+      "support": 14
+    },
+    {
+      "breed": "samoyed",
+      "name": "Samoyed",
+      "precision": 81.2,
+      "recall": 76.5,
+      "f1_score": 78.8,
+      "support": 17
+    },
+    {
+      "breed": "yorkshire_terrier",
+      "name": "Yorkshire Terrier",
+      "precision": 73.3,
+      "recall": 84.6,
+      "f1_score": 78.6,
+      "support": 13
+    },
+    {
+      "breed": "cocker_spaniel",
+      "name": "Cocker Spaniel",
+      "precision": 75.0,
+      "recall": 81.8,
+      "f1_score": 78.3,
+      "support": 11
+    },
+    {
+      "breed": "pekinese",
+      "name": "Pekinese",
+      "precision": 75.0,
+      "recall": 81.8,
+      "f1_score": 78.3,
+      "support": 11
+    },
+    {
+      "breed": "maltese_dog",
+      "name": "Maltese Dog",
+      "precision": 81.2,
+      "recall": 72.2,
+      "f1_score": 76.5,
+      "support": 18
+    },
+    {
+      "breed": "boxer",
+      "name": "Boxer",
+      "precision": 80.0,
+      "recall": 72.7,
+      "f1_score": 76.2,
+      "support": 11
+    },
+    {
+      "breed": "dingo",
+      "name": "Dingo",
+      "precision": 88.9,
+      "recall": 66.7,
+      "f1_score": 76.2,
+      "support": 12
+    },
+    {
+      "breed": "miniature_schnauzer",
+      "name": "Miniature Schnauzer",
+      "precision": 80.0,
+      "recall": 72.7,
+      "f1_score": 76.2,
+      "support": 11
+    },
+    {
+      "breed": "beagle",
+      "name": "Beagle",
+      "precision": 66.7,
+      "recall": 87.5,
+      "f1_score": 75.7,
+      "support": 16
+    },
+    {
+      "breed": "chesapeake_bay_retriever",
+      "name": "Chesapeake Bay Retriever",
+      "precision": 81.8,
+      "recall": 69.2,
+      "f1_score": 75.0,
+      "support": 13
+    },
+    {
+      "breed": "great_dane",
+      "name": "Great Dane",
+      "precision": 69.2,
+      "recall": 81.8,
+      "f1_score": 75.0,
+      "support": 11
+    },
+    {
+      "breed": "rottweiler",
+      "name": "Rottweiler",
+      "precision": 69.2,
+      "recall": 81.8,
+      "f1_score": 75.0,
+      "support": 11
+    },
+    {
+      "breed": "briard",
+      "name": "Briard",
+      "precision": 77.8,
+      "recall": 70.0,
+      "f1_score": 73.7,
+      "support": 10
+    },
+    {
+      "breed": "golden_retriever",
+      "name": "Golden Retriever",
+      "precision": 77.8,
+      "recall": 70.0,
+      "f1_score": 73.7,
+      "support": 10
+    },
+    {
+      "breed": "vizsla",
+      "name": "Vizsla",
+      "precision": 77.8,
+      "recall": 70.0,
+      "f1_score": 73.7,
+      "support": 10
+    },
+    {
+      "breed": "cairn",
+      "name": "Cairn",
+      "precision": 78.6,
+      "recall": 68.8,
+      "f1_score": 73.3,
+      "support": 16
+    },
+    {
+      "breed": "norfolk_terrier",
+      "name": "Norfolk Terrier",
+      "precision": 61.1,
+      "recall": 91.7,
+      "f1_score": 73.3,
+      "support": 12
+    },
+    {
+      "breed": "irish_terrier",
+      "name": "Irish Terrier",
+      "precision": 88.9,
+      "recall": 61.5,
+      "f1_score": 72.7,
+      "support": 13
+    },
+    {
+      "breed": "soft-coated_wheaten_terrier",
+      "name": "Soft Coated Wheaten Terrier",
+      "precision": 66.7,
+      "recall": 80.0,
+      "f1_score": 72.7,
+      "support": 10
+    },
+    {
+      "breed": "shih-tzu",
+      "name": "Shih Tzu",
+      "precision": 63.6,
+      "recall": 82.4,
+      "f1_score": 71.8,
+      "support": 17
+    },
+    {
+      "breed": "great_pyrenees",
+      "name": "Great Pyrenees",
+      "precision": 57.7,
+      "recall": 88.2,
+      "f1_score": 69.8,
+      "support": 17
+    },
+    {
+      "breed": "german_shepherd",
+      "name": "German Shepherd",
+      "precision": 61.5,
+      "recall": 80.0,
+      "f1_score": 69.6,
+      "support": 10
+    },
+    {
+      "breed": "shetland_sheepdog",
+      "name": "Shetland Sheepdog",
+      "precision": 66.7,
+      "recall": 72.7,
+      "f1_score": 69.6,
+      "support": 11
+    },
+    {
+      "breed": "english_foxhound",
+      "name": "English Foxhound",
+      "precision": 69.2,
+      "recall": 69.2,
+      "f1_score": 69.2,
+      "support": 13
+    },
+    {
+      "breed": "basset",
+      "name": "Basset",
+      "precision": 66.7,
+      "recall": 66.7,
+      "f1_score": 66.7,
+      "support": 12
+    },
+    {
+      "breed": "chihuahua",
+      "name": "Chihuahua",
+      "precision": 75.0,
+      "recall": 60.0,
+      "f1_score": 66.7,
+      "support": 10
+    },
+    {
+      "breed": "collie",
+      "name": "Collie",
+      "precision": 72.7,
+      "recall": 61.5,
+      "f1_score": 66.7,
+      "support": 13
+    },
+    {
+      "breed": "redbone",
+      "name": "Redbone",
+      "precision": 70.0,
+      "recall": 63.6,
+      "f1_score": 66.7,
+      "support": 11
+    },
+    {
+      "breed": "tibetan_terrier",
+      "name": "Tibetan Terrier",
+      "precision": 60.0,
+      "recall": 75.0,
+      "f1_score": 66.7,
+      "support": 16
+    },
+    {
+      "breed": "welsh_springer_spaniel",
+      "name": "Welsh Springer Spaniel",
+      "precision": 77.8,
+      "recall": 58.3,
+      "f1_score": 66.7,
+      "support": 12
+    },
+    {
+      "breed": "irish_wolfhound",
+      "name": "Irish Wolfhound",
+      "precision": 57.9,
+      "recall": 73.3,
+      "f1_score": 64.7,
+      "support": 15
+    },
+    {
+      "breed": "australian_terrier",
+      "name": "Australian Terrier",
+      "precision": 66.7,
+      "recall": 62.5,
+      "f1_score": 64.5,
+      "support": 16
+    },
+    {
+      "breed": "siberian_husky",
+      "name": "Siberian Husky",
+      "precision": 58.8,
+      "recall": 71.4,
+      "f1_score": 64.5,
+      "support": 14
+    },
+    {
+      "breed": "malamute",
+      "name": "Malamute",
+      "precision": 56.2,
+      "recall": 75.0,
+      "f1_score": 64.3,
+      "support": 12
+    },
+    {
+      "breed": "standard_poodle",
+      "name": "Standard Poodle",
+      "precision": 56.2,
+      "recall": 75.0,
+      "f1_score": 64.3,
+      "support": 12
+    },
+    {
+      "breed": "labrador_retriever",
+      "name": "Labrador Retriever",
+      "precision": 66.7,
+      "recall": 61.5,
+      "f1_score": 64.0,
+      "support": 13
+    },
+    {
+      "breed": "staffordshire_bullterrier",
+      "name": "Staffordshire Bullterrier",
+      "precision": 61.5,
+      "recall": 66.7,
+      "f1_score": 64.0,
+      "support": 12
+    },
+    {
+      "breed": "norwich_terrier",
+      "name": "Norwich Terrier",
+      "precision": 75.0,
+      "recall": 54.5,
+      "f1_score": 63.2,
+      "support": 11
+    },
+    {
+      "breed": "standard_schnauzer",
+      "name": "Standard Schnauzer",
+      "precision": 75.0,
+      "recall": 54.5,
+      "f1_score": 63.2,
+      "support": 11
+    },
+    {
+      "breed": "rhodesian_ridgeback",
+      "name": "Rhodesian Ridgeback",
+      "precision": 61.5,
+      "recall": 61.5,
+      "f1_score": 61.5,
+      "support": 13
+    },
+    {
+      "breed": "appenzeller",
+      "name": "Appenzeller",
+      "precision": 66.7,
+      "recall": 54.5,
+      "f1_score": 60.0,
+      "support": 11
+    },
+    {
+      "breed": "giant_schnauzer",
+      "name": "Giant Schnauzer",
+      "precision": 60.0,
+      "recall": 60.0,
+      "f1_score": 60.0,
+      "support": 10
+    },
+    {
+      "breed": "wire-haired_fox_terrier",
+      "name": "Wire Haired Fox Terrier",
+      "precision": 85.7,
+      "recall": 46.2,
+      "f1_score": 60.0,
+      "support": 13
+    },
+    {
+      "breed": "lakeland_terrier",
+      "name": "Lakeland Terrier",
+      "precision": 77.8,
+      "recall": 46.7,
+      "f1_score": 58.3,
+      "support": 15
+    },
+    {
+      "breed": "brittany_spaniel",
+      "name": "Brittany Spaniel",
+      "precision": 60.0,
+      "recall": 54.5,
+      "f1_score": 57.1,
+      "support": 11
+    },
+    {
+      "breed": "miniature_poodle",
+      "name": "Miniature Poodle",
+      "precision": 66.7,
+      "recall": 50.0,
+      "f1_score": 57.1,
+      "support": 12
+    },
+    {
+      "breed": "toy_poodle",
+      "name": "Toy Poodle",
+      "precision": 66.7,
+      "recall": 50.0,
+      "f1_score": 57.1,
+      "support": 12
+    },
+    {
+      "breed": "silky_terrier",
+      "name": "Silky Terrier",
+      "precision": 50.0,
+      "recall": 64.3,
+      "f1_score": 56.3,
+      "support": 14
+    },
+    {
+      "breed": "flat-coated_retriever",
+      "name": "Flat Coated Retriever",
+      "precision": 54.5,
+      "recall": 54.5,
+      "f1_score": 54.5,
+      "support": 11
+    },
+    {
+      "breed": "italian_greyhound",
+      "name": "Italian Greyhound",
+      "precision": 43.5,
+      "recall": 71.4,
+      "f1_score": 54.1,
+      "support": 14
+    },
+    {
+      "breed": "kuvasz",
+      "name": "Kuvasz",
+      "precision": 80.0,
+      "recall": 40.0,
+      "f1_score": 53.3,
+      "support": 10
+    },
+    {
+      "breed": "cardigan",
+      "name": "Cardigan",
+      "precision": 62.5,
+      "recall": 45.5,
+      "f1_score": 52.6,
+      "support": 11
+    },
+    {
+      "breed": "american_staffordshire_terrier",
+      "name": "American Staffordshire Terrier",
+      "precision": 50.0,
+      "recall": 54.5,
+      "f1_score": 52.2,
+      "support": 11
+    },
+    {
+      "breed": "whippet",
+      "name": "Whippet",
+      "precision": 66.7,
+      "recall": 42.9,
+      "f1_score": 52.2,
+      "support": 14
+    },
+    {
+      "breed": "lhasa",
+      "name": "Lhasa",
+      "precision": 62.5,
+      "recall": 35.7,
+      "f1_score": 45.5,
+      "support": 14
+    },
+    {
+      "breed": "walker_hound",
+      "name": "Walker Hound",
+      "precision": 50.0,
+      "recall": 30.0,
+      "f1_score": 37.5,
+      "support": 10
+    },
+    {
+      "breed": "eskimo_dog",
+      "name": "Eskimo Dog",
+      "precision": 66.7,
+      "recall": 20.0,
+      "f1_score": 30.8,
+      "support": 10
+    }
+  ],
+  "commonly_confused_breeds": [
+    {
+      "no": 1,
+      "actual_breed": "Whippet",
+      "predicted_breed": "Italian Greyhound",
+      "count": 7,
+      "count_str": "7 images",
+      "reason": "Identical slender sighthound posture and sleek coat."
+    },
+    {
+      "no": 2,
+      "actual_breed": "Lhasa",
+      "predicted_breed": "Shih-Tzu",
+      "count": 6,
+      "count_str": "6 images",
+      "reason": "Closely related Tibetan companion dogs with similar long facial hair."
+    },
+    {
+      "no": 3,
+      "actual_breed": "Eskimo Dog",
+      "predicted_breed": "Siberian Husky",
+      "count": 5,
+      "count_str": "5 images",
+      "reason": "Arctic spitz breeds with erect ears, thick double coats, and curled tails."
+    },
+    {
+      "no": 4,
+      "actual_breed": "Australian Terrier",
+      "predicted_breed": "Silky Terrier",
+      "count": 4,
+      "count_str": "4 images",
+      "reason": "Related terrier types sharing wiry/silky coats and similar silhouettes."
+    },
+    {
+      "no": 5,
+      "actual_breed": "Kuvasz",
+      "predicted_breed": "Great Pyrenees",
+      "count": 4,
+      "count_str": "4 images",
+      "reason": "Large flock-guarding breeds with solid white, thick coats."
+    },
+    {
+      "no": 6,
+      "actual_breed": "Maltese Dog",
+      "predicted_breed": "West Highland White Terrier",
+      "count": 4,
+      "count_str": "4 images",
+      "reason": "Similar fine-grained facial features, fur texture, and color."
+    },
+    {
+      "no": 7,
+      "actual_breed": "Samoyed",
+      "predicted_breed": "Great Pyrenees",
+      "count": 4,
+      "count_str": "4 images",
+      "reason": "Large breeds sharing solid white, fluffy double coats."
+    },
+    {
+      "no": 8,
+      "actual_breed": "Staffordshire Bullterrier",
+      "predicted_breed": "American Staffordshire Terrier",
+      "count": 4,
+      "count_str": "4 images",
+      "reason": "Closely related bully breeds sharing blocky heads, muscular frames, and short coats."
+    },
+    {
+      "no": 9,
+      "actual_breed": "Cardigan",
+      "predicted_breed": "Pembroke",
+      "count": 3,
+      "count_str": "3 images",
+      "reason": "Both Welsh Corgi breeds, differing mainly in tail and ear shape."
+    },
+    {
+      "no": 10,
+      "actual_breed": "Collie",
+      "predicted_breed": "Shetland Sheepdog",
+      "count": 3,
+      "count_str": "3 images",
+      "reason": "Herding breeds sharing similar facial markings and fluffy ruffs."
+    },
+    {
+      "no": 11,
+      "actual_breed": "Irish Wolfhound",
+      "predicted_breed": "Scottish Deerhound",
+      "count": 3,
+      "count_str": "3 images",
+      "reason": "Similar body structure, coat texture, and appearance."
+    },
+    {
+      "no": 12,
+      "actual_breed": "Lakeland Terrier",
+      "predicted_breed": "Soft-Coated Wheaten Terrier",
+      "count": 3,
+      "count_str": "3 images",
+      "reason": "Similar tan/wheaten coat colors and bearded facial profiles."
+    }
+  ]
+}

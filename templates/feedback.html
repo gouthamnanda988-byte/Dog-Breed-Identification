@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block title %}Feedback - Dog Breed Identification{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<section class="page-header">
+    <h1>💬 User Feedback & Rating</h1>
+    <p>Share your experience, rate our model's accuracy, and help us improve</p>
+</section>
+
+<div class="container feedback-container">
+
+    <div class="feedback-grid">
+
+        <!-- Form Card -->
+        <div class="content-card feedback-form-card">
+            <div class="card-header-icon">
+                <span class="icon-bubble">⭐</span>
+                <h2>Submit Your Review</h2>
+            </div>
+
+            <!-- User Auth Status Notice -->
+            <div class="feedback-user-notice">
+                {% if session.get('username') %}
+                <span class="user-pill-auth">👤 Submitting as <strong>{{ session.get('username') }}</strong></span>
+                {% else %}
+                <span class="user-pill-guest">👤 Submitting as <strong>Guest</strong> &bull; <a href="{{ url_for('login', next=url_for('feedback_page')) }}">Log In</a> to link feedback to your account</span>
+                {% endif %}
+            </div>
+
+            <form action="{{ url_for('feedback_page') }}" method="POST" class="feedback-form">
+
+                <!-- Star Rating Field -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <strong>Rating:</strong>
+                        <span class="rating-subtext">Click a star to rate from 1 to 5</span>
+                    </label>
+
+                    <div class="star-rating-widget">
+                        <div class="rating-group" id="ratingGroup">
+                            <input type="radio" id="star5" name="rating" value="5" {% if selected_rating == 5 %}checked{% endif %}>
+                            <label for="star5" title="5 stars — Excellent">★</label>
+
+                            <input type="radio" id="star4" name="rating" value="4" {% if selected_rating == 4 %}checked{% endif %}>
+                            <label for="star4" title="4 stars — Very Good">★</label>
+
+                            <input type="radio" id="star3" name="rating" value="3" {% if selected_rating == 3 %}checked{% endif %}>
+                            <label for="star3" title="3 stars — Good">★</label>
+
+                            <input type="radio" id="star2" name="rating" value="2" {% if selected_rating == 2 %}checked{% endif %}>
+                            <label for="star2" title="2 stars — Fair">★</label>
+
+                            <input type="radio" id="star1" name="rating" value="1" {% if selected_rating == 1 %}checked{% endif %}>
+                            <label for="star1" title="1 star — Poor">★</label>
+                        </div>
+                        <span class="rating-text-feedback" id="ratingText">
+                            {% if selected_rating %}
+                                Rated {{ selected_rating }} of 5 stars
+                            {% else %}
+                                Select your rating
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Feedback Comments -->
+                <div class="form-group">
+                    <label for="feedbackMessage" class="form-label">
+                        <strong>Your Comments & Experience:</strong>
+                    </label>
+                    <textarea
+                        id="feedbackMessage"
+                        name="message"
+                        rows="5"
+                        class="feedback-textarea"
+                        placeholder="Tell us about model prediction accuracy, user interface, or any suggestions you have for Dog Breed Identification..."
+                        required
+                    >{{ message if message else '' }}</textarea>
+                    <span class="textarea-hint">Constructive reviews help us improve breed identification and UI features.</span>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="feedback-actions">
+                    <button type="submit" class="btn btn-primary btn-submit-feedback">
+                        🚀 Submit Feedback
+                    </button>
+                    <a href="{{ url_for('home') }}" class="btn btn-secondary">Cancel</a>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Information / Value Card -->
+        <div class="content-card feedback-info-card">
+            <div class="card-header-icon">
+                <span class="icon-bubble">💡</span>
+                <h2>Why Feedback Matters</h2>
+            </div>
+            <p>
+                Your feedback provides vital real-world validation data for our deep learning project:
+            </p>
+
+            <ul class="feedback-benefits-list">
+                <li>
+                    <span class="benefit-icon">🎯</span>
+                    <div>
+                        <strong>Real-World Accuracy:</strong>
+                        <p>Helps verify whether the 120-breed MobileNetV2 model accurately identifies your dog photos.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="benefit-icon">📊</span>
+                    <div>
+                        <strong>Live Admin Analytics:</strong>
+                        <p>Ratings instantly update average scores and recent feedback records on the Admin Dashboard.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="benefit-icon">🐾</span>
+                    <div>
+                        <strong>Continuous Improvement:</strong>
+                        <p>User feedback flags edge-case breeds and helps evaluate fine-tuning opportunities.</p>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="info-box feedback-guide-box">
+                <strong>Need Help?</strong> You can test model performance anytime on the <a href="{{ url_for('performance') }}">Performance Page</a> or explore all 120 breeds on the <a href="{{ url_for('breed_info') }}">Breed Info Page</a>.
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var ratingInputs = document.querySelectorAll('input[name="rating"]');
+    var ratingText = document.getElementById('ratingText');
+    var ratingLabels = {
+        '5': '5 stars — Excellent ⭐⭐⭐⭐⭐',
+        '4': '4 stars — Very Good ⭐⭐⭐⭐',
+        '3': '3 stars — Good ⭐⭐⭐',
+        '2': '2 stars — Fair ⭐⭐',
+        '1': '1 star — Poor ⭐'
+    };
+
+    ratingInputs.forEach(function (radio) {
+        radio.addEventListener('change', function () {
+            if (this.checked && ratingLabels[this.value]) {
+                ratingText.textContent = ratingLabels[this.value];
+                ratingText.style.color = '#8B5E3C';
+                ratingText.style.fontWeight = '600';
+            }
+        });
+    });
+});
+</script>
+
+{% endblock %}

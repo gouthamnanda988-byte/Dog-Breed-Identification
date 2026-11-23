@@ -1,0 +1,263 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction History - Dog Breed Identification{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>📜 Prediction History</h1>
+    <p>Review and manage your previous dog breed identifications</p>
+</section>
+
+<div class="container">
+    <section class="section">
+
+        {% if predictions and predictions|length > 0 %}
+        <div class="content-card">
+            <div class="history-card-header">
+                <div>
+                    <h2>Saved Identifications ({{ predictions|length }})</h2>
+                    <p class="history-card-subtitle">Stored securely in MySQL database</p>
+                </div>
+                <form method="POST" action="{{ url_for('clear_history') }}" onsubmit="return confirm('Are you sure you want to clear all your prediction history? This action cannot be undone.');">
+                    <button type="submit" class="btn btn-clear-all">
+                        🗑️ Clear All
+                    </button>
+                </form>
+            </div>
+
+            <div class="history-table-wrapper">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Photo</th>
+                            <th>Predicted Breed</th>
+                            <th>Confidence</th>
+                            <th>Date & Time</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in predictions %}
+                        <tr>
+                            <td class="history-idx">{{ loop.index }}</td>
+                            <td class="history-img-cell">
+                                <img
+                                    src="{{ url_for('static', filename='images/uploads/' + item.image_path) }}"
+                                    alt="{{ item.predicted_breed }}"
+                                    class="history-thumbnail"
+                                    onerror="this.src='https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=150';"
+                                />
+                            </td>
+                            <td>
+                                <strong class="history-breed-name">{{ item.predicted_breed }}</strong>
+                                {% if item.top3_parsed and item.top3_parsed|length > 1 %}
+                                <div class="history-top3-sub">
+                                    <span class="history-top3-label">Top 3:</span>
+                                    {% for sub in item.top3_parsed %}
+                                        <span class="history-top3-chip">{{ sub.breed }} ({{ sub.confidence|round(1) }}%)</span>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <span class="history-confidence-badge">{{ item.confidence|round(2) }}%</span>
+                            </td>
+                            <td class="history-date">
+                                {{ item.created_at.strftime('%b %d, %Y') if item.created_at else 'Recent' }}<br>
+                                <small>{{ item.created_at.strftime('%I:%M %p') if item.created_at else '' }}</small>
+                            </td>
+                            <td class="history-actions-cell">
+                                <div class="history-actions-group">
+                                    <button
+                                        type="button"
+                                        class="btn-action-view"
+                                        onclick="openDetailsModal(this)"
+                                        data-id="{{ item.prediction_id }}"
+                                        data-img="{{ url_for('static', filename='images/uploads/' + item.image_path) }}"
+                                        data-breed="{{ item.predicted_breed }}"
+                                        data-conf="{{ item.confidence|round(2) }}"
+                                        data-model="{{ item.model_version }}"
+                                        data-date="{{ item.created_at.strftime('%B %d, %Y at %I:%M %p') if item.created_at else 'Recent' }}"
+                                        data-top3='{{ item.top3_results|e }}'
+                                        title="View Full Details"
+                                    >
+                                        👁️ Details
+                                    </button>
+
+                                    <a
+                                        href="{{ url_for('download_report_by_id', prediction_id=item.prediction_id) }}"
+                                        class="btn-action-pdf"
+                                        title="Download PDF Prediction Report"
+                                    >
+                                        📄 PDF
+                                    </a>
+
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('delete_history_item', prediction_id=item.prediction_id) }}"
+                                        onsubmit="return confirm('Delete this prediction record?');"
+                                        style="display: inline;"
+                                    >
+                                        <button type="submit" class="btn-action-delete" title="Delete record">
+                                            🗑️
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% else %}
+        <!-- Empty State -->
+        <div class="content-card">
+            <div class="placeholder-msg">
+                <div class="placeholder-icon">📋</div>
+                <h2>No Prediction History Yet</h2>
+                <p>
+                    Your past dog breed predictions will be saved and displayed here automatically.
+                    Upload a dog photo to get started!
+                </p>
+                <div style="margin-top: 24px;">
+                    <a href="{{ url_for('identify') }}" class="btn btn-choose" style="margin-top: 0; display: inline-flex;">
+                        📷 Identify a Dog Now
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Information Box -->
+        <div class="content-card" style="margin-top: 24px;">
+            <h2>🗄️ About Prediction History</h2>
+            <p>
+                Every dog breed identification is stored in your local MySQL database (<code>dog_breed_db.prediction_history</code>).
+                Each record retains the uploaded image filename, predicted breed, confidence score, full top-3 candidate rankings, and server timestamp.
+            </p>
+        </div>
+
+    </section>
+</div>
+
+<!-- ==================== Details Modal Dialog ==================== -->
+<div class="modal-overlay" id="detailsModal" onclick="closeDetailsModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+        <div class="modal-header">
+            <h3>🐕 Prediction Details</h3>
+            <button type="button" class="modal-close-btn" onclick="closeDetailsModal()">&times;</button>
+        </div>
+
+        <div class="modal-body">
+            <div class="modal-image-box">
+                <img id="modalImg" src="" alt="Dog photo" />
+            </div>
+
+            <div class="modal-info-box">
+                <div class="result-badge" style="margin-bottom: 6px;">Predicted Breed</div>
+                <h2 id="modalBreed" style="color: var(--brown-dark); margin-bottom: 6px; font-size: 1.6rem;"></h2>
+                <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px;">
+                    Confidence Score: <strong id="modalConf" style="color: var(--brown);"></strong>
+                </p>
+
+                <div class="top3-container" id="modalTop3Container" style="margin-top: 0;">
+                    <h4 class="top3-title">Top 3 Predictions</h4>
+                    <div id="modalTop3List"></div>
+                </div>
+
+                <div class="modal-meta-grid">
+                    <div class="modal-meta-item">
+                        <span class="meta-label">Model Architecture:</span>
+                        <span class="meta-value" id="modalModel">MobileNetV2-v1</span>
+                    </div>
+                    <div class="modal-meta-item">
+                        <span class="meta-label">Date & Time:</span>
+                        <span class="meta-value" id="modalDate">—</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+            <a id="modalPdfBtn" href="#" class="btn btn-download-report" style="margin: 0; padding: 8px 18px; font-size: 0.9rem;">
+                📄 Download PDF Report
+            </a>
+            <button type="button" class="btn btn-reset" onclick="closeDetailsModal()" style="margin: 0; padding: 8px 22px;">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+function openDetailsModal(btn) {
+    var predId = btn.getAttribute('data-id');
+    var imgUrl = btn.getAttribute('data-img');
+    var breed = btn.getAttribute('data-breed');
+    var conf = btn.getAttribute('data-conf');
+    var model = btn.getAttribute('data-model') || 'MobileNetV2-v1';
+    var date = btn.getAttribute('data-date');
+    var top3Raw = btn.getAttribute('data-top3');
+
+    document.getElementById('modalPdfBtn').href = '/download_report/' + predId;
+    document.getElementById('modalImg').src = imgUrl;
+    document.getElementById('modalBreed').textContent = breed;
+    document.getElementById('modalConf').textContent = conf + '%';
+    document.getElementById('modalModel').textContent = model;
+    document.getElementById('modalDate').textContent = date;
+
+    var listEl = document.getElementById('modalTop3List');
+    listEl.innerHTML = '';
+
+    try {
+        var top3 = JSON.parse(top3Raw);
+        if (top3 && top3.length > 0) {
+            for (var i = 0; i < top3.length; i++) {
+                var item = top3[i];
+                var rank = i + 1;
+                var confVal = Math.min(100, Math.max(0, item.confidence));
+                var itemHtml =
+                    '<div class="prediction-item">' +
+                        '<div class="prediction-header">' +
+                            '<span class="prediction-name"><strong>#' + rank + '</strong> ' + item.breed + '</span>' +
+                            '<span class="prediction-percent">' + Number(item.confidence).toFixed(2) + '%</span>' +
+                        '</div>' +
+                        '<div class="confidence-bar-bg">' +
+                            '<div class="confidence-bar-fill" style="width: ' + confVal + '%;"></div>' +
+                        '</div>' +
+                    '</div>';
+                listEl.innerHTML += itemHtml;
+            }
+        } else {
+            listEl.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">No additional rankings recorded.</p>';
+        }
+    } catch (e) {
+        listEl.innerHTML = '<p style="color: var(--text-muted); font-size: 0.9rem;">Top 3 breakdown not available.</p>';
+    }
+
+    var modal = document.getElementById('detailsModal');
+    modal.classList.add('active');
+}
+
+function closeDetailsModal(event) {
+    if (event && event.target && event.target.id !== 'detailsModal' && !event.target.classList.contains('modal-close-btn') && !event.target.classList.contains('btn-reset')) {
+        return;
+    }
+    var modal = document.getElementById('detailsModal');
+    modal.classList.remove('active');
+}
+
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        var modal = document.getElementById('detailsModal');
+        if (modal && modal.classList.contains('active')) {
+            modal.classList.remove('active');
+        }
+    }
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up - Dog Breed Identification{% endblock %}
+
+{% block content %}
+
+<section class="page-header">
+    <h1>🐾 Create Your Account</h1>
+    <p>Sign up to track your prediction history and bookmark your favorite dog breeds</p>
+</section>
+
+<div class="container">
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div class="auth-icon">📝</div>
+                <h2>Register Account</h2>
+                <p>Join the Dog Breed Identification platform</p>
+            </div>
+
+            <form method="POST" action="{{ url_for('signup') }}" class="auth-form" novalidate>
+                <!-- Username -->
+                <div class="form-group">
+                    <label for="username"><strong>Username</strong></label>
+                    <div class="input-with-icon">
+                        <span class="input-icon">👤</span>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            class="form-control"
+                            placeholder="e.g. canine_lover"
+                            value="{{ request.form.get('username', '') }}"
+                            required
+                            minlength="3"
+                            maxlength="30"
+                            autocomplete="username"
+                        />
+                    </div>
+                    <small class="form-hint">At least 3 characters. Letters, numbers, and underscores only.</small>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email"><strong>Email Address</strong></label>
+                    <div class="input-with-icon">
+                        <span class="input-icon">✉️</span>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="e.g. user@example.com"
+                            value="{{ request.form.get('email', '') }}"
+                            required
+                            autocomplete="email"
+                        />
+                    </div>
+                    <small class="form-hint">We will never share your email. Each account requires a unique email.</small>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password"><strong>Password</strong></label>
+                    <div class="input-with-icon">
+                        <span class="input-icon">🔒</span>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Minimum 6 characters"
+                            required
+                            minlength="6"
+                            autocomplete="new-password"
+                        />
+                    </div>
+                    <small class="form-hint">Passwords are securely hashed using Werkzeug cryptographic scrypt.</small>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    <label for="confirm_password"><strong>Confirm Password</strong></label>
+                    <div class="input-with-icon">
+                        <span class="input-icon">🔑</span>
+                        <input
+                            type="password"
+                            id="confirm_password"
+                            name="confirm_password"
+                            class="form-control"
+                            placeholder="Re-enter your password"
+                            required
+                            minlength="6"
+                            autocomplete="new-password"
+                        />
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-auth-submit">
+                    🚀 Create Account
+                </button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Already have an account? <a href="{{ url_for('login') }}" class="auth-link"><strong>Log in here</strong></a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

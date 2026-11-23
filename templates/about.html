@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+
+{% block title %}About This Project - Dog Breed Identification{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+<section class="page-header">
+    <h1>📖 About This Project</h1>
+    <p>B.Tech Data Science College Project</p>
+</section>
+
+<div class="container about-container">
+
+    <!-- 1. Project Overview -->
+    <div class="content-card about-card">
+        <div class="card-header-icon">
+            <span class="icon-bubble">🐾</span>
+            <h2>Project Overview</h2>
+        </div>
+        <p class="lead-text">
+            <strong>Dog Breed Identification</strong> is an end-to-end Data Science and Deep Learning web application that classifies 120 dog breeds from user-uploaded images. The system leverages transfer learning with MobileNetV2 to deliver breed predictions and confidence scores through an interactive web interface.
+        </p>
+        <p>
+            This project demonstrates the complete data science lifecycle — dataset preprocessing, transfer learning and fine-tuning, confusion matrix evaluation, and full-stack web deployment.
+        </p>
+    </div>
+
+    <!-- 2. Problem Statement & Project Objectives -->
+    <div class="about-two-col-grid">
+        <!-- Problem Statement -->
+        <div class="content-card about-card">
+            <div class="card-header-icon">
+                <span class="icon-bubble">🎯</span>
+                <h2>Problem Statement</h2>
+            </div>
+            <p>
+                Manually identifying purebred dog breeds is often difficult and prone to error, even for veterinary staff, shelter workers, and dog enthusiasts. With more than a hundred recognized breeds worldwide, canine visual classification exhibits two fundamental computer vision challenges:
+            </p>
+            <ul class="about-feature-list">
+                <li><strong>High Intra-Class Variance:</strong> Dogs belonging to the same breed can vary widely in coat color, fur length, ear shape, grooming style, and body size.</li>
+                <li><strong>Low Inter-Class Variance:</strong> Many distinct breeds share virtually identical facial shapes, sighthound silhouettes, or terrier coats (such as Whippet vs. Italian Greyhound or Lhasa Apso vs. Shih-Tzu).</li>
+            </ul>
+            <p>
+                These visual subtleties create an urgent need for an automated, image-based classification system that delivers objective, fast, and reliable breed identification.
+            </p>
+        </div>
+
+        <!-- Project Objectives -->
+        <div class="content-card about-card">
+            <div class="card-header-icon">
+                <span class="icon-bubble">🚀</span>
+                <h2>Project Objectives</h2>
+            </div>
+            <p>The primary goals and functional deliverables of this project include:</p>
+            <ul class="objectives-list">
+                <li><span class="check-icon">✓</span> <span><strong>Identify dog breeds</strong> from user-uploaded images.</span></li>
+                <li><span class="check-icon">✓</span> <span><strong>Classify images</strong> into 120 different breeds.</span></li>
+                <li><span class="check-icon">✓</span> <span><strong>Display prediction confidence scores</strong> and ranked Top-3 alternatives.</span></li>
+                <li><span class="check-icon">✓</span> <span><strong>Provide useful breed information</strong>, attributes, and side-by-side comparison.</span></li>
+                <li><span class="check-icon">✓</span> <span><strong>Maintain prediction records</strong> through the database.</span></li>
+                <li><span class="check-icon">✓</span> <span><strong>Present model performance</strong> through evaluation charts.</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 3. Model Information -->
+    <div class="content-card about-card">
+        <div class="card-header-icon">
+            <span class="icon-bubble">🧠</span>
+            <h2>Model Information & Performance Summary</h2>
+        </div>
+        <p>
+            The fine-grained canine classification system is powered by transfer learning with MobileNetV2, fine-tuned specifically on 120 purebred dog categories. Below are the verified technical specifications and evaluation results:
+        </p>
+
+        <div class="model-specs-grid">
+            <div class="spec-card">
+                <div class="spec-label">Model Architecture</div>
+                <div class="spec-value">MobileNetV2</div>
+                <div class="spec-desc">Pre-trained on ImageNet with custom classification head</div>
+            </div>
+            <div class="spec-card">
+                <div class="spec-label">Learning Approach</div>
+                <div class="spec-value">Transfer Learning</div>
+                <div class="spec-desc">Transfer learning and fine-tuning on dog features</div>
+            </div>
+            <div class="spec-card">
+                <div class="spec-label">Input Image Size</div>
+                <div class="spec-value">224 × 224</div>
+                <div class="spec-desc">3 color channels (RGB) normalized to [-1, 1]</div>
+            </div>
+            <div class="spec-card">
+                <div class="spec-label">Number of Classes</div>
+                <div class="spec-value">120 Dog Breeds</div>
+                <div class="spec-desc">Stanford Dogs / Kaggle Dog Breed dataset</div>
+            </div>
+            <div class="spec-card">
+                <div class="spec-label">Test Dataset</div>
+                <div class="spec-value">1,534 Images</div>
+                <div class="spec-desc">Held-out test images (stratified evaluation set)</div>
+            </div>
+            <div class="spec-card highlight">
+                <div class="spec-label">Top-1 Test Accuracy</div>
+                <div class="spec-value">77.64%</div>
+                <div class="spec-desc">Exact ground-truth match on test set</div>
+            </div>
+            <div class="spec-card highlight">
+                <div class="spec-label">Top-5 Test Accuracy</div>
+                <div class="spec-value">96.87%</div>
+                <div class="spec-desc">Correct breed present in top 5 predictions</div>
+            </div>
+            <div class="spec-card">
+                <div class="spec-label">Test Loss</div>
+                <div class="spec-value">0.7036</div>
+                <div class="spec-desc">Categorical crossentropy loss</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Technologies Used -->
+    <div class="content-card about-card">
+        <div class="card-header-icon">
+            <span class="icon-bubble">🛠️</span>
+            <h2>Technologies Used</h2>
+        </div>
+        <p>The project employs modern, industry-standard tools across every layer of the full-stack architecture:</p>
+
+        <div class="tech-stack-grid">
+            <div class="tech-box">
+                <div class="tech-icon">🐍</div>
+                <div class="tech-title">Python</div>
+                <div class="tech-desc">Primary programming language for dataset preprocessing, model training, and server logic</div>
+            </div>
+            <div class="tech-box">
+                <div class="tech-icon">🌶️</div>
+                <div class="tech-title">Flask</div>
+                <div class="tech-desc">Backend web framework handling routing, session security, and API endpoints</div>
+            </div>
+            <div class="tech-box">
+                <div class="tech-icon">🌐</div>
+                <div class="tech-title">HTML, CSS, JavaScript</div>
+                <div class="tech-desc">Frontend development providing a responsive, interactive user interface</div>
+            </div>
+            <div class="tech-box">
+                <div class="tech-icon">🧠</div>
+                <div class="tech-title">TensorFlow / Keras</div>
+                <div class="tech-desc">Deep learning framework used for model building, fine-tuning, and inference</div>
+            </div>
+            <div class="tech-box">
+                <div class="tech-icon">📱</div>
+                <div class="tech-title">MobileNetV2</div>
+                <div class="tech-desc">Transfer learning architecture utilizing depthwise separable convolutions</div>
+            </div>
+            <div class="tech-box">
+                <div class="tech-icon">🔢</div>
+                <div class="tech-title">NumPy and Pandas</div>
+                <div class="tech-desc">Numerical computing and data handling for array transformations and label mapping</div>
+            </div>
+            <div class="tech-box">
+                <div class="tech-icon">📈</div>
+                <div class="tech-title">Matplotlib / Chart.js</div>
+                <div class="tech-desc">Performance visualization for training curves, confusion analysis, and dashboard charts</div>
+            </div>
+            <div class="tech-box">
+                <div class="tech-icon">🗄️</div>
+                <div class="tech-title">MySQL</div>
+                <div class="tech-desc">Database management for users, prediction history, favorite breeds, and feedback</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. Project Phases Timeline -->
+    <div class="content-card about-card">
+        <div class="card-header-icon">
+            <span class="icon-bubble">📋</span>
+            <h2>Project Phases & Development Timeline</h2>
+        </div>
+        <p>The project was executed in a structured, milestone-driven approach across five key phases:</p>
+
+        <div class="phases-timeline">
+            <!-- Phase 1 -->
+            <div class="timeline-item completed">
+                <div class="timeline-marker">
+                    <span class="marker-circle">✓</span>
+                    <span class="marker-line"></span>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <span class="phase-tag">Phase 1</span>
+                        <span class="status-badge status-completed">Completed</span>
+                    </div>
+                    <h3>Project Setup</h3>
+                    <p>Project setup, folder structure, and homepage UI.</p>
+                </div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="timeline-item completed">
+                <div class="timeline-marker">
+                    <span class="marker-circle">✓</span>
+                    <span class="marker-line"></span>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <span class="phase-tag">Phase 2</span>
+                        <span class="status-badge status-completed">Completed</span>
+                    </div>
+                    <h3>Dataset Preparation</h3>
+                    <p>120-breed dataset collection and 224 × 224 image preprocessing.</p>
+                </div>
+            </div>
+
+            <!-- Phase 3 -->
+            <div class="timeline-item completed">
+                <div class="timeline-marker">
+                    <span class="marker-circle">✓</span>
+                    <span class="marker-line"></span>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <span class="phase-tag">Phase 3</span>
+                        <span class="status-badge status-completed">Completed</span>
+                    </div>
+                    <h3>Model Development</h3>
+                    <p>MobileNetV2 model training, fine-tuning, and evaluation.</p>
+                </div>
+            </div>
+
+            <!-- Phase 4 -->
+            <div class="timeline-item completed">
+                <div class="timeline-marker">
+                    <span class="marker-circle">✓</span>
+                    <span class="marker-line"></span>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <span class="phase-tag">Phase 4</span>
+                        <span class="status-badge status-completed">Completed</span>
+                    </div>
+                    <h3>Web Application Development</h3>
+                    <p>Image upload feature and real-time dog breed prediction.</p>
+                </div>
+            </div>
+
+            <!-- Phase 5 -->
+            <div class="timeline-item completed">
+                <div class="timeline-marker">
+                    <span class="marker-circle">✓</span>
+                </div>
+                <div class="timeline-content">
+                    <div class="timeline-header">
+                        <span class="phase-tag">Phase 5</span>
+                        <span class="status-badge status-completed">Completed</span>
+                    </div>
+                    <h3>Testing and Deployment</h3>
+                    <p>Final testing, optimization, database integration, and deployment preparation.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-box status-summary-box">
+            <strong>Current Project Status:</strong> All 5 development phases are fully completed. The application is completely functional with 120-breed prediction, MySQL persistence, authentication, PDF reports, and an admin dashboard.
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
