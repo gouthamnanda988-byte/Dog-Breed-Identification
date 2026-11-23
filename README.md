@@ -276,50 +276,7 @@ Open your browser and navigate to: **http://127.0.0.1:5000**
 
 ---
 
-## College Review & Viva Demonstration Guide
 
-When presenting this project during a B.Tech review or viva, follow this structured demonstration flow:
-
-### 1. Introduction & Problem Statement (1 minute)
-- Explain that canine image identification is challenging due to **high intra-class variance** (different fur colors and poses in the same breed) and **low inter-class variance** (visually identical breeds such as Whippet vs. Italian Greyhound or Siberian Husky vs. Eskimo Dog).
-- Introduce your solution: a two-stage deep learning pipeline with full-stack database tracking.
-
-### 2. Live Feature Walkthrough (3-4 minutes)
-1. **Dog vs. Non-Dog Validation:**
-   - Upload a non-dog photo (e.g. horse, cat, car).
-   - Show how the model immediately flags `No Dog Detected` instead of forcing a fake dog breed prediction.
-2. **Breed Prediction & Top 3:**
-   - Upload a genuine dog photo (e.g., Labrador Retriever or Siberian Husky).
-   - Point out the primary prediction, confidence percentage, and top 3 alternatives.
-3. **Instant PDF Report:**
-   - Click **Download Prediction Report (PDF)**.
-   - Open the generated PDF showing the embedded image, prediction metrics, timestamp, and academic disclaimer.
-4. **User Auth & Prediction History:**
-   - Show registration and login.
-   - Navigate to **History** to show how real predictions are stored in MySQL with timestamp and preview.
-   - Demonstrate the modal view and delete option.
-5. **Breed Directory & Side-by-Side Comparison:**
-   - Navigate to **Breed Info**.
-   - Show real-time search and size filtering across the 120 breeds.
-   - Switch to the **Compare Two Breeds** tab and select two similar breeds (e.g., Whippet and Italian Greyhound) to show side-by-side traits.
-6. **Model Performance & Visual Similarity Analysis:**
-   - Navigate to **Performance**.
-   - Show the training/validation accuracy curves and explain the **Commonly Confused Dog Breeds** section highlighting visual similarity reasons.
-7. **Admin Dashboard:**
-   - Show the protected **Admin** panel with live user counts, prediction metrics, and Chart.js analytics.
-
-### 3. Frequently Asked Viva Questions & Answers
-
-| Viva Question | Concise Student Answer |
-|---|---|
-| **Why did you use Transfer Learning instead of training a CNN from scratch?** | Training a CNN from scratch on 120 classes with only ~10,000 images would lead to severe overfitting. Pretrained MobileNetV2 already learned rich low-level visual features (edges, textures, shapes) from ImageNet's 1.4 million images, enabling high accuracy with faster convergence. |
-| **How does the Dog vs. Non-Dog detector work?** | It uses an ImageNet classification backbone. ImageNet contains 118 specific dog class indices (151-268, plus 273 and 275). If the top-1 predicted class is within these dog indices or the cumulative dog probability exceeds the threshold (0.20), the image is validated as a dog; otherwise, it is rejected. |
-| **What does Top-5 Accuracy mean?** | Top-5 accuracy measures whether the true ground-truth breed is among the model's top 5 highest probability predictions. Our model achieves **96.87% top-5 accuracy**, demonstrating that even when the top-1 prediction misses, the correct breed is almost always within the top candidates. |
-| **Why do certain breeds get misclassified?** | Breeds like Whippet vs. Italian Greyhound or Lhasa vs. Shih-Tzu share identical body silhouettes, facial structures, and coat textures. Without scale context (size reference in the image), 2D CNNs naturally assign close probabilities to both. |
-| **How is password security handled?** | We use Werkzeug's `generate_password_hash` and `check_password_hash` which employ PBKDF2 with SHA-256 and unique cryptographic salts. Passwords are never stored as plain text. |
-| **How are SQL injection attacks prevented?** | All database queries use parameterized SQL execution (`%s` placeholders with tuple parameters) across all CRUD operations in `database/db.py`. |
-
----
 
 ## Comprehensive 18-Point Testing Checklist
 
